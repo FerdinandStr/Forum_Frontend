@@ -1,0 +1,36 @@
+{
+    "scripts": {
+        "start": "vite",
+        "buildv": "vite build",
+        "serve": "vite preview",
+        "wp": "webpack --config webpack.common.js"
+    },
+    "dependencies": {
+        "@emotion/react": "^11.7.1",
+        "@emotion/styled": "^11.6.0",
+        "@mui/lab": "^5.0.0-alpha.63",
+        "@mui/material": "^5.2.7",
+        "axios": "^0.24.0",
+        "react": "^17.0.2",
+        "react-dom": "^17.0.2",
+        "react-icons": "^4.3.1",
+        "react-router-dom": "^6.2.1"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.16.7",
+        "@babel/preset-env": "^7.16.7",
+        "@babel/preset-react": "^7.16.7",
+        "@vitejs/plugin-react": "^1.1.4",
+        "babel-loader": "^8.2.3",
+        "clean-webpack-plugin": "^4.0.0",
+        "css-loader": "^6.5.1",
+        "css-minimizer-webpack-plugin": "^3.3.1",
+        "mini-css-extract-plugin": "^2.4.5",
+        "prettier": "^2.5.1",
+        "style-loader": "^3.3.1",
+        "terser-webpack-plugin": "^5.3.0",
+        "vite": "^2.7.10",
+        "webpack": "^5.65.0",
+        "webpack-cli": "^4.9.1"
+    }
+}
