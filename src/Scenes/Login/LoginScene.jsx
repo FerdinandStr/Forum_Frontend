@@ -23,7 +23,7 @@ function LoginScene(props) {
         userLogin(login, password)
             .then((data) => {
                 setIsLoggedIn(data.username)
-                navigate("/items")
+                navigate("/")
             })
             .catch((e) => {
                 // console.log("Login failed", e.response)

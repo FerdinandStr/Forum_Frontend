@@ -5,6 +5,7 @@ import Header from "./components/Header/Header"
 import { SideMenu, useSideMenuState } from "./components/SideMenu/SideMenu"
 import useSearchResult from "./hooks/useSearchResult"
 import DummyScene from "./Scenes/Dummy/DummyScene"
+import Home from "./Scenes/Home/Home"
 
 function MainPage(props) {
     const { useLogin } = props
@@ -22,6 +23,7 @@ function MainPage(props) {
 
             <Routes>
                 <Route index element={<DummyScene />} />
+                <Route path="/home" element={<Home />} />
                 {/* <Route path="/items" element={<ItemOverview items={items} />} />
                 <Route path="/items/new" element={<NewItemScene />} />
                 <Route path="/items/:itemId" element={<ViewItemScene useLogin={useLogin} />} /> */}

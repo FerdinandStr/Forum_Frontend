@@ -1,0 +1,70 @@
+.FoldingContainer {
+    overflow: hidden;
+    -webkit-transition: 0.5s ease-in-out;
+    -moz-transition: 0.5s ease-in-out;
+    -o-transition: 0.5s ease-in-out;
+    transition: 0.5s ease-in-out;
+
+    box-sizing: border-box;
+    border-radius: 4px;
+
+    max-height: 800px;
+    width: 100%;
+    display: auto;
+    flex-direction: column;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: #E1A700;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.35);
+}
+
+
+.ContainerHeader {
+    display: flex;
+    margin-bottom: 8px;
+    cursor: pointer;
+}
+
+/* CONTENT MOVEMENT */
+
+.ContainerContent {
+    -webkit-transition: 0.5s ease-in-out;
+    -moz-transition: 0.5s ease-in-out;
+    -o-transition: 0.5s ease-in-out;
+    transition: 0.5s ease-in-out;
+
+    max-height: 800px;
+}
+
+#ClosedContent {
+    max-height: 0px;
+}
+
+/* ICON */
+.FoldingIconDiv {
+    grid-column: 2;
+    grid-row: 1;
+    width: 20px;
+    height: 20px;
+    margin: auto 20px auto auto;
+    color: white;
+}
+
+.FoldingIcon {
+    font-size: 30px;
+    cursor: pointer;
+    text-align: right;
+    -webkit-transition: 0.5s ease-in-out;
+    -moz-transition: 0.5s ease-in-out;
+    -o-transition: 0.5s ease-in-out;
+    transition: 0.5s ease-in-out;
+}
+
+#ContainerIconOpen {
+    -webkit-transform: rotateX(180deg);
+    -moz-transform: rotateX(180deg);
+    -ms-transform: rotateX(180deg);
+    -o-transform: rotateX(180deg);
+    transform: rotateX(180deg);
+}
+
