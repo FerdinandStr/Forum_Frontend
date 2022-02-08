@@ -12,18 +12,19 @@ function MainPage(props) {
 
     //page after Login
     //login handle with App.js
-    const { items, setSearchInput } = useSearchResult()
+    //const { items, setSearchInput } = useSearchResult()
     const sideMenuState = useSideMenuState()
     const [isSideMenuOpen, setSideMenuOpen] = sideMenuState
 
     return (
         <div>
-            <Header useLogin={useLogin} setSearchInput={setSearchInput} setSideMenuOpen={setSideMenuOpen} />
+            {/*<Header useLogin={useLogin} setSearchInput={setSearchInput} setSideMenuOpen={setSideMenuOpen} />*/}
+            <Header useLogin={useLogin} setSideMenuOpen={setSideMenuOpen} />
             <SideMenu state={sideMenuState} />
 
             <Routes>
                 <Route index element={<DummyScene />} />
-                <Route path="/home" element={<Home />} />
+                <Route path="/home/:forumId" element={<Home />} />
                 {/* <Route path="/items" element={<ItemOverview items={items} />} />
                 <Route path="/items/new" element={<NewItemScene />} />
                 <Route path="/items/:itemId" element={<ViewItemScene useLogin={useLogin} />} /> */}

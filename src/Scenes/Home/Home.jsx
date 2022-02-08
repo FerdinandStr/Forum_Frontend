@@ -4,25 +4,41 @@ import GenericFoldingContainer from "./Components/FoldingContainer/GenericFoldin
 import ReactMarkdown from 'react-markdown'
 import { getForeneintraegeById } from "../../api/foreneintragRoutes"
 import { getForenById } from "../../api/forenRoutes"
-
+import { useParams, Link } from "react-router-dom";
 export default function Home() {
 
-    const [foren, setForen] = useState({ idParentForum: "", name: "", ersteller: "", createdAt: "", updatedAt: "" })
-    const [eintraege, setEintraege] = useState({ idForeneintrag: "", idForum: "", name: "", idKategorie: "", ersteller: "", createdAt: "", updatedAt: "" })
+    let { forumId } = useParams();
+
+    const [foren, setForen] = useState() //{ idParentForum: "", name: "", ersteller: "", createdAt: "", updatedAt: "" }
+    const [eintraege, setEintraege] = useState()//{ idParentForum: "", name: "", ersteller: "", createdAt: "", updatedAt: "" }
 
     useEffect((() => {
-        getForenById({ idParentForum: 1 })
-            .then((data) => { console.log(data) })
+        getForenById({ idParentForum: forumId })
+            .then((data) => { setForen(data); })
+            //.then(console.log(foren))
             .catch((data) => { })
 
-        getForeneintraegeById({ idForum: 1, idKategorie: "", idForeneintrag: "" })
-            .then((data) => { console.log(data) })
+        getForeneintraegeById({ idForum: forumId, idKategorie: "", idForeneintrag: "" })
+            .then((data) => { console.log(data); setEintraege(data); })
             .catch((data) => { })
-    }), [foren, eintraege])
+    }), [forumId])//foren, eintraege
 
     return <div className={styles.dummyDiv}>
         <div> DHBW-Heidenheim -> Wirtschaftsinformatik -> B -> Webprogramierung -> Props</div>
         <GenericFoldingContainer key={1} headlineComponent={<h2>{"Unterforen"}</h2>}>
+
+            {foren
+                ? foren.map(forum =>
+                    <div className={styles.content}>
+                        <hr />
+                        <Link to={'/home/' + forum.idForum}>{forum.name}</Link> -#-   xXxAnzahl der Beiträge xXx  -#- {forum.createdAt}
+                        <hr />
+                    </div>
+                )
+                : console.log(foren)
+            }
+
+
             <div className={styles.content}>
                 <ReactMarkdown>{"Test 123"}</ReactMarkdown>
             </div>
@@ -39,9 +55,16 @@ export default function Home() {
 
                     <div>Wie kann ich Variablen an ein Übergerodnetes Objekt zurückgeben bzw. dort ändern ?</div>
                 </div>
-                <ReactMarkdown>{"Test 123"}</ReactMarkdown>
-                <ReactMarkdown>{"Test 456"}</ReactMarkdown>
-                <ReactMarkdown>{"Test 789"}</ReactMarkdown>
+                {eintraege
+                    ? eintraege.map(eintrag =>
+                        <div className={styles.content}>
+                            <hr />
+                            {eintrag.name} -#-  {eintrag.ersteller}  -#- {eintrag.createdAt}
+                            <hr />
+                        </div>
+                    )
+                    : console.log(eintraege)
+                }
             </div>
         </GenericFoldingContainer>
     </div>
