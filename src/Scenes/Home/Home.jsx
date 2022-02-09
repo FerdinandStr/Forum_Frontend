@@ -18,7 +18,7 @@ export default function Home() {
             .catch((data) => { })
 
         getForeneintraegeById({ idForum: forumId, idKategorie: "", idForeneintrag: "" })
-            .then((data) => { setEintraege(data); })
+            .then((data) => { setEintraege(data); console.log(data) })
             .catch((data) => { })
     }), [forumId])//foren, eintraege
 
@@ -58,7 +58,8 @@ export default function Home() {
                     ? eintraege.map(eintrag =>
                         <div className={styles.content}>
                             <hr />
-                            {eintrag.name} -#-  {eintrag.ersteller}  -#- {eintrag.createdAt}
+                            <Link to={'/foren/' + eintrag.idForum + '/foreneintraege/' + eintrag.idForeneintrag}>{eintrag.name} </Link>-#-  {eintrag.ersteller}  -#- {eintrag.createdAt}
+
                             <hr />
                         </div>
                     )

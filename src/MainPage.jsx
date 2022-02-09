@@ -8,7 +8,8 @@ import DummyScene from "./Scenes/Dummy/DummyScene"
 import Home from "./Scenes/Home/Home"
 import CreateUnterforum from "./Scenes/CreateUnterforum/CreateUnterforum"
 import CreateForeneintrag from "./Scenes/CreateForeneintrag/CreateForeneintrag"
-
+import Beitraege from "./Scenes/Beitraege/Beitraege"
+Beitraege
 
 function MainPage(props) {
     const { useLogin } = props
@@ -29,7 +30,8 @@ function MainPage(props) {
                 <Route index element={<DummyScene />} />
                 <Route path="/home/:forumId" element={<Home />} />
                 <Route path="/addForum/:forumId" element={<CreateUnterforum />} />
-                <Route path="/addForeneintrag" element={<CreateForeneintrag />} />
+                <Route path="/addForeneintrag/:forumId" element={<CreateForeneintrag />} />
+                <Route path="/foren/:idForum/foreneintraege/:idForeneintrag" element={<Beitraege />} />
                 {/* <Route path="/items" element={<ItemOverview items={items} />} />
                 <Route path="/items/new" element={<NewItemScene />} />
                 <Route path="/items/:itemId" element={<ViewItemScene useLogin={useLogin} />} /> */}
