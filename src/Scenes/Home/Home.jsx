@@ -20,6 +20,17 @@ export default function Home() {
         getForeneintraegeById({ idForum: forumId, idKategorie: "", idForeneintrag: "" })
             .then((data) => { setEintraege(data); console.log(data) })
             .catch((data) => { })
+
+        const interval = setInterval(() => {
+            getForenById({ idParentForum: forumId })
+                .then((data) => { setForen(data); })
+                .catch((data) => { })
+
+            getForeneintraegeById({ idForum: forumId, idKategorie: "", idForeneintrag: "" })
+                .then((data) => { setEintraege(data); console.log(data) })
+                .catch((data) => { })
+        }, 10000)
+        return () => clearInterval(interval)
     }), [forumId])//foren, eintraege
 
     return <div className={styles.dummyDiv}>

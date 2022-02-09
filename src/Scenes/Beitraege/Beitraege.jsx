@@ -53,6 +53,27 @@ export default function Beitraege() {
             .then((data) => { setakForenbeitrag(data); console.log(data) })
             .catch((data) => { })
 
+        const interval = setInterval(() => {
+            let params_Beitrag = {
+                "idBeitrag": null,
+                "idForum": idForum,
+                "idForeneintrag": idForeneintrag,
+                "ersteller": null
+            }
+            getBeitraege(params_Beitrag)
+                .then((data) => { setEintraege(data); console.log(data) })
+                .catch((data) => { })
+
+            let params_ForneEint = {
+                "idForum": idForum,
+                "idForeneintrag": idForeneintrag,
+                "idKategorie": null
+            }
+            getForeneintraegeById(params_ForneEint)
+                .then((data) => { setakForenbeitrag(data); console.log(data) })
+                .catch((data) => { })
+        }, 10000)
+        return () => clearInterval(interval)
     }), [idForum, idForeneintrag])
 
     return <div className={styles.dummyDiv}>
