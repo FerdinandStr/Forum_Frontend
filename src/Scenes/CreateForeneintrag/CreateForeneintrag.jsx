@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import styles from "./CreateUnterforum.module.css"
-import GenericFoldingContainer from "./Components/FoldingContainer/GenericFoldingContainer.jsx"
+import styles from "./CreateForeneintrag.module.css"
 import ReactMarkdown from 'react-markdown'
 import { getForeneintraegeById } from "../../api/foreneintragRoutes"
 import { getForenById } from "../../api/forenRoutes"
 import { useParams, Link } from "react-router-dom";
+
 export default function CreateForeneintrag() {
 
     let { forumId } = useParams();

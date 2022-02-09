@@ -15,11 +15,10 @@ export default function Home() {
     useEffect((() => {
         getForenById({ idParentForum: forumId })
             .then((data) => { setForen(data); })
-            //.then(console.log(foren))
             .catch((data) => { })
 
         getForeneintraegeById({ idForum: forumId, idKategorie: "", idForeneintrag: "" })
-            .then((data) => { console.log(data); setEintraege(data); })
+            .then((data) => { setEintraege(data); })
             .catch((data) => { })
     }), [forumId])//foren, eintraege
 

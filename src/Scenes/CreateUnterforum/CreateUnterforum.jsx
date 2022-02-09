@@ -1,30 +1,40 @@
 import React, { useEffect, useState } from 'react'
 import styles from "./CreateUnterforum.module.css"
-import GenericFoldingContainer from "./Components/FoldingContainer/GenericFoldingContainer.jsx"
-import ReactMarkdown from 'react-markdown'
-import { getForeneintraegeById } from "../../api/foreneintragRoutes"
-import { getForenById } from "../../api/forenRoutes"
+import { postForen } from "../../api/forenRoutes"
 import { useParams, Link } from "react-router-dom";
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+
+// Achtung !!!! ParentID Muss Numeric sein + Name muss min. 5 Zeichen lang sein 
+// TODO !!!!!! 
+
 export default function CreateUnterforum() {
 
     let { forumId } = useParams();
 
-    const [foren, setForen] = useState() //{ idParentForum: "", name: "", ersteller: "", createdAt: "", updatedAt: "" }
-    const [eintraege, setEintraege] = useState()//{ idParentForum: "", name: "", ersteller: "", createdAt: "", updatedAt: "" }
+    const [name, setName] = useState()
 
-    useEffect((() => {
-        getForenById({ idParentForum: forumId })
-            .then((data) => { setForen(data); })
-            //.then(console.log(foren))
-            .catch((data) => { })
+    const handleChangeName = (e) => {
+        setName(e.target.value)
+    }
+    const createForum = (e) => {
+        let paresedId = parseInt(forumId)
 
-        getForeneintraegeById({ idForum: forumId, idKategorie: "", idForeneintrag: "" })
-            .then((data) => { console.log(data); setEintraege(data); })
-            .catch((data) => { })
-    }), [forumId])//foren, eintraege
+        let data = {
+            "name": name,
+            "idParentForum": paresedId
+        }
+        postForen(data)
+    };
+
 
     return <div className={styles.dummyDiv}>
-        <div> test</div>
-
+        <div> Forum erstellen</div>        <TextField
+            id="outlined-disabled"
+            label="Name"
+            onChange={handleChangeName}
+        />
+        <Button variant="contained" onClick={createForum}>Erstellen</Button>
+        <Button variant="outlined">Abbrechen</Button>
     </div>
 }
