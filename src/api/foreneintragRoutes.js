@@ -10,9 +10,13 @@ function getForeneintraegeById(queryParams) {
     return getReq("/foreneintraege", null, { params: queryParams })
 }
 
+function getBeitraegeForForeneintrag(idForeneintrag) {
+    return getReq("/foreneintraege/" + idForeneintrag + "/beitraege")
+}
+
 //Delete
 function deleteForeneintraegeById(forenId) {
     return postReq("/foreneintraege/" + forenId, null, { method: "delete" })
 }
 
-export { postForeneintraege, getForeneintraegeById, deleteForeneintraegeById }
+export { postForeneintraege, getBeitraegeForForeneintrag, getForeneintraegeById, deleteForeneintraegeById }

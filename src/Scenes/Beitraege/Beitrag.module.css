@@ -1,0 +1,19 @@
+.BeitragDiv {
+    border: solid 1px red;
+    display: flex;
+}
+.BeitragContentArea {
+    padding: 5px;
+    flex: auto;
+}
+
+.BeitragHeader {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+    border-bottom: 1px lightgray solid;
+}
+
+.ErstellerDiv {
+    border: seagreen 1px solid;
+}
