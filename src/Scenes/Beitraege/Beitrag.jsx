@@ -1,10 +1,9 @@
+import DOMPurify from "dompurify"
 import React from "react"
 import styles from "./Beitrag.module.css"
 
-export default function Beitrag({ beitragData }) {
+export default function Beitrag({ beitragData, parseMdToHtml }) {
     const { idBeitrag, inhalt, createdAt, ersteller } = beitragData
-
-    console.log("Ersteller", ersteller)
 
     return (
         <div className={styles.BeitragDiv}>
@@ -16,7 +15,7 @@ export default function Beitrag({ beitragData }) {
                     <div>{createdAt}</div>
                     <div>{"# " + idBeitrag}</div>
                 </div>
-                <div>{inhalt}</div>
+                <div className={styles.BeitragInhalt} dangerouslySetInnerHTML={{ __html: parseMdToHtml(inhalt) }} />
                 <div></div>
             </div>
         </div>

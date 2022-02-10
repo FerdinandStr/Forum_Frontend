@@ -17,3 +17,7 @@
 .ErstellerDiv {
     border: seagreen 1px solid;
 }
+
+.BeitragInhalt > * {
+    all: revert;
+}

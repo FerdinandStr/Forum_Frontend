@@ -104,3 +104,8 @@ a:hover {
 .Error404Image {
     width: 100%;
 }
+
+/* this reverts all css changes for everything rendered by the react markdown editor library */
+.custom-html-style > * {
+    all: revert;
+}
