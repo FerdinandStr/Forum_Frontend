@@ -14,10 +14,9 @@
     flex-direction: column;
     margin-top: 10px;
     margin-bottom: 10px;
-    background-color: #E1A700;
+    background-color: var(--alt-box-bg-color);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.35);
 }
-
 
 .ContainerHeader {
     display: flex;
@@ -34,6 +33,7 @@
     transition: 0.5s ease-in-out;
 
     max-height: 800px;
+    background-color: var(--main-box-bg-color);
 }
 
 #ClosedContent {
@@ -67,4 +67,3 @@
     -o-transform: rotateX(180deg);
     transform: rotateX(180deg);
 }
-

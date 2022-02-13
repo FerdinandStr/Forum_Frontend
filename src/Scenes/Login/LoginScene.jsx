@@ -4,7 +4,7 @@ import { useNavigate } from "react-router"
 import { userLogin, userRegister } from "../../api/authRoutes"
 import styles from "./LoginScene.module.css"
 
-function LoginScene(props) {
+export default function LoginScene(props) {
     const navigate = useNavigate()
     const { useLogin } = props
     const [isLoggedIn, setIsLoggedIn] = useLogin
@@ -156,5 +156,3 @@ function LoginScene(props) {
         </div>
     )
 }
-
-export default LoginScene

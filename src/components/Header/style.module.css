@@ -1,4 +1,10 @@
 .HeaderDiv {
     display: flex;
-    background-color: blueviolet;
+    background-color: var(--alt-box-bg-color);
+    padding: 10px;
+    margin-bottom: 25px;
+}
+
+.Logo {
+    width: 150px;
 }

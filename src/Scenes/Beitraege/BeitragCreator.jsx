@@ -4,6 +4,8 @@ import "react-markdown-editor-lite/lib/index.css"
 import { Button } from "@mui/material"
 import { postBeitraege } from "../../api/beitragRoutes"
 
+//!!! for style changes look in globalStyles.css !!!//
+
 export default function BeitragCreator({ idForum, idForeneintrag, parseMdToHtml, forceUpdateBeitraege }) {
     const [mdText, setMdText] = useState("")
 
@@ -18,8 +20,8 @@ export default function BeitragCreator({ idForum, idForeneintrag, parseMdToHtml,
     }
 
     return (
-        <div>
-            <MdEditor style={{ height: "500px" }} value={mdText} renderHTML={(text) => parseMdToHtml(text)} onChange={(e) => setMdText(e.text)} />
+        <div className="forum-md-editor">
+            <MdEditor style={{ minHeight: "300px" }} value={mdText} renderHTML={(text) => parseMdToHtml(text)} onChange={(e) => setMdText(e.text)} />
             <Button variant="contained" onClick={createBeitrag}>
                 Beitrag senden
             </Button>

@@ -1,30 +1,30 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from "react"
 import styles from "./CreateForeneintrag.module.css"
 import { postForeneintraege } from "../../api/foreneintragRoutes"
 import { getKategorie } from "../../api/kategorieRoutes"
 import { postBeitraege } from "../../api/beitragRoutes"
-import { useParams, Link } from "react-router-dom";
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
-import MenuItem from '@mui/material/MenuItem';
+import { useParams, Link } from "react-router-dom"
+import Button from "@mui/material/Button"
+import TextField from "@mui/material/TextField"
+import MenuItem from "@mui/material/MenuItem"
 
-import InputLabel from '@mui/material/InputLabel';
-import Select from '@mui/material/Select';
-// Achtung !!!! ParentID Muss Numeric sein + Name muss min. 5 Zeichen lang sein 
-// TODO !!!!!! 
+import InputLabel from "@mui/material/InputLabel"
+import Select from "@mui/material/Select"
+// Achtung !!!! ParentID Muss Numeric sein + Name muss min. 5 Zeichen lang sein
+// TODO !!!!!!
 
 //https://mui.com/components/selects/
 
 export default function CreateForeneintrag() {
     /*-------------------------Weiter zum Komentarbereich----------------------------- */
-    const history = useHistory();
+    const history = useHistory()
     const routeChange = () => {
-        let path = '/home';
-        history.push(path);
+        let path = "/home"
+        history.push(path)
     }
     /*-------------------------Weiter zum Komentarbereich----------------------------- */
 
-    let { forumId } = useParams();
+    let { idForum } = useParams()
 
     const [name, setName] = useState()
     const [kategories, setKategories] = useState()
@@ -46,66 +46,62 @@ export default function CreateForeneintrag() {
     }
 
     const createForeneintrag = (e) => {
-        let paresedId = parseInt(forumId)
+        let paresedId = parseInt(idForum)
         if (!isNaN(paresedId) || name || initBeitrag) {
             let data_forum = {
-                "idForum": paresedId,
-                "name": name,
-                "idKategorie": selectedKategorie.id_kategorie
+                idForum: paresedId,
+                name: name,
+                idKategorie: selectedKategorie.id_kategorie,
             }
-            postForeneintraege(data_forum).then(res => {
-
+            postForeneintraege(data_forum).then((res) => {
                 let data_beitrag = {
-                    "idForum": paresedId,
-                    "idForeneintrag": res.idForeneintrag,
-                    "inhalt": initBeitrag
-
+                    idForum: paresedId,
+                    idForeneintrag: res.idForeneintrag,
+                    inhalt: initBeitrag,
                 }
-                postBeitraege(data_beitrag);
+                postBeitraege(data_beitrag)
             })
         }
+    }
 
-    };
+    useEffect(() => {
+        getKategorie([]).then((data) => {
+            console.log(data)
+            setKategories(data)
+        })
+    }, [idForum])
 
-    useEffect((() => {
-        getKategorie([])
-            .then((data) => { console.log(data); setKategories(data) })
-    }), [forumId])
+    return (
+        <div>
+            <div> Foreneintrag erstellen</div>
 
-    return <div className={styles.dummyDiv}>
-        <div> Foreneintrag erstellen</div>
+            <TextField id="outlined-disabled" label="Name" onChange={handleChangeName} />
 
-        <TextField
-            id="outlined-disabled"
-            label="Name"
-            onChange={handleChangeName}
-        />
+            <InputLabel id="demo-simple-select-label">Kategorie</InputLabel>
+            <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={selectedKategorie}
+                label="Age"
+                onChange={handleChangeSelectedKategorie}
+            >
+                {kategories
+                    ? kategories.map((kat) => {
+                          return (
+                              <MenuItem key={kat.idKategorie} value={kat}>
+                                  {kat.name}
+                              </MenuItem>
+                          )
+                      })
+                    : null}
+            </Select>
 
-        <InputLabel id="demo-simple-select-label">Kategorie</InputLabel>
-        <Select
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
-            value={selectedKategorie}
-            label="Age"
+            <TextField id="outlined-disabled" label="Beschreibung" onChange={handleChangeinitBeitrag} />
 
-            onChange={handleChangeSelectedKategorie}
-        >
-            {kategories ? kategories.map(kat => {
-                return (
-                    <MenuItem key={kat.idKategorie} value={kat}>
-                        {kat.name}
-                    </MenuItem>
-                )
-            }) : null}
-        </Select>
-
-        <TextField
-            id="outlined-disabled"
-            label="Beschreibung"
-            onChange={handleChangeinitBeitrag}
-        />
-
-        <Button variant="contained" onClick={createForeneintrag}>Erstellen</Button>
-        <Button variant="outlined">Abbrechen</Button>
-    </div>
+            <Button variant="contained" onClick={createForeneintrag}>
+                Erstellen
+            </Button>
+            <Button variant="outlined">Abbrechen</Button>
+        </div>
+    )
 }

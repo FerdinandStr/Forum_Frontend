@@ -21,7 +21,9 @@ function Header(props) {
     return (
         <div className={styles.HeaderDiv}>
             <Button onClick={() => setSideMenuOpen(true)}>{"left"}</Button>
-            <div>Logo</div>
+            <div>
+                <img className={styles.Logo} src="/public/img/StudiForum_V1_transparent.svg" />
+            </div>
             <div>
                 <TextField
                     id="outlined-basic"

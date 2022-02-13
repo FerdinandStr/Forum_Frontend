@@ -1,48 +1,46 @@
 import React, { useEffect, useState } from "react"
-import styles from "./Home.module.css"
+import styles from "./ForumScene.module.css"
 import GenericFoldingContainer from "./Components/FoldingContainer/GenericFoldingContainer.jsx"
-import ReactMarkdown from "react-markdown"
 import { getForeneintraegeById } from "../../api/foreneintragRoutes"
 import { getForenById } from "../../api/forenRoutes"
 import { useParams, Link } from "react-router-dom"
-export default function Home() {
-    let { forumId } = useParams()
+
+export default function Forum() {
+    let { idForum } = useParams()
+    idForum = idForum || 1
 
     const [foren, setForen] = useState() //{ idParentForum: "", name: "", ersteller: "", createdAt: "", updatedAt: "" }
     const [eintraege, setEintraege] = useState() //{ idParentForum: "", name: "", ersteller: "", createdAt: "", updatedAt: "" }
 
     useEffect(() => {
-        getForenById({ idParentForum: forumId })
+        getForenById({ idParentForum: idForum })
             .then((data) => {
                 setForen(data)
             })
             .catch((data) => {})
 
-        getForeneintraegeById({ idForum: forumId, idKategorie: "", idForeneintrag: "" })
+        getForeneintraegeById({ idForum: idForum, idKategorie: "", idForeneintrag: "" })
             .then((data) => {
                 setEintraege(data)
                 console.log(data)
             })
             .catch((data) => {})
-    }, [forumId]) //foren, eintraege
+    }, [idForum]) //foren, eintraege
 
     return (
-        <div className={styles.dummyDiv}>
-            <div> DHBW-Heidenheim -> Wirtschaftsinformatik -> B -> Webprogramierung -> Props</div>
+        <div>
             <GenericFoldingContainer key={1} headlineComponent={<h2>{"Unterforen"}</h2>}>
                 {foren
                     ? foren.map((forum) => (
                           <div className={styles.content}>
                               <hr />
-                              <Link to={"/home/" + forum.idForum}>{forum.name}</Link> -#- xXxAnzahl der Beiträge xXx -#- {forum.createdAt}
+                              <Link to={"/foren/" + forum.idForum}>{forum.name}</Link> -#- xXxAnzahl der Beiträge xXx -#- {forum.createdAt}
                               <hr />
                           </div>
                       ))
-                    : console.log(foren)}
+                    : null}
 
-                <div className={styles.content}>
-                    <ReactMarkdown>{"Test 123"}</ReactMarkdown>
-                </div>
+                <div className={styles.content}>"Test 123"</div>
             </GenericFoldingContainer>
 
             <GenericFoldingContainer key={2} headlineComponent={<h2>{"Diskussionen"}</h2>}>

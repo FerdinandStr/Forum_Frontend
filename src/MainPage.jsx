@@ -1,40 +1,37 @@
-import React, { useState } from "react"
-import { Navigate, Route, Routes, useNavigate } from "react-router"
+import React from "react"
+import { Navigate, Route, Routes } from "react-router"
 import Footer from "./components/Footer"
 import Header from "./components/Header/Header"
 import { SideMenu, useSideMenuState } from "./components/SideMenu/SideMenu"
 import useSearchResult from "./hooks/useSearchResult"
-import DummyScene from "./Scenes/Dummy/DummyScene"
-import Home from "./Scenes/Home/Home"
 import CreateUnterforum from "./Scenes/CreateUnterforum/CreateUnterforum"
 import CreateForeneintrag from "./Scenes/CreateForeneintrag/CreateForeneintrag"
 import Beitraege from "./Scenes/Beitraege/Beitraege"
-Beitraege
+import useLoginStatus from "./hooks/useLoginStatus"
+import LoginScene from "./Scenes/Login/LoginScene"
+import Forum from "./Scenes/ForumScene/Forum"
 
-function MainPage(props) {
-    const { useLogin } = props
+function MainPage() {
+    const useLogin = useLoginStatus()
 
-    //page after Login
-    //login handle with App.js
-    //const { items, setSearchInput } = useSearchResult()
+    const { items, setSearchInput } = useSearchResult()
     const sideMenuState = useSideMenuState()
     const [isSideMenuOpen, setSideMenuOpen] = sideMenuState
 
     return (
         <div>
-            {/*<Header useLogin={useLogin} setSearchInput={setSearchInput} setSideMenuOpen={setSideMenuOpen} />*/}
-            <Header useLogin={useLogin} setSideMenuOpen={setSideMenuOpen} />
+            <Header useLogin={useLogin} setSearchInput={setSearchInput} setSideMenuOpen={setSideMenuOpen} />
             <SideMenu state={sideMenuState} />
 
             <Routes>
-                <Route index element={<DummyScene />} />
-                <Route path="/home/:forumId" element={<Home />} />
-                <Route path="/addForum/:forumId" element={<CreateUnterforum />} />
-                <Route path="/addForeneintrag/:forumId" element={<CreateForeneintrag />} />
+                <Route path="/" element={<Navigate to="/foren" />} />
+                <Route path="/login" element={<LoginScene useLogin={useLogin} />} />
+                <Route path="foren" element={<Forum />}>
+                    <Route path=":idForum" />
+                </Route>
+                <Route path="/foren/:idForum/addForum" element={<CreateUnterforum />} />
+                <Route path="/foren/:idForum/addForeneintrag" element={<CreateForeneintrag />} />
                 <Route path="/foren/:idForum/foreneintraege/:idForeneintrag" element={<Beitraege />} />
-                {/* <Route path="/items" element={<ItemOverview items={items} />} />
-                <Route path="/items/new" element={<NewItemScene />} />
-                <Route path="/items/:itemId" element={<ViewItemScene useLogin={useLogin} />} /> */}
             </Routes>
             <Footer />
         </div>

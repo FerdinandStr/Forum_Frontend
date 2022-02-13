@@ -1,5 +1,13 @@
-@import url("https://fonts.googleapis.com/css2?&family=Merienda&family=Roboto:wght@400;500&display=swap");
 /* @import url("https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"); */
+
+:root {
+    --main-bg-color: #24272c;
+    --main-box-bg-color: #2d3036;
+    --alt-box-bg-color: #1b1d21;
+    --alt2-box-bg-color: rgb(57, 61, 67);
+    --main-text-color: #fff;
+    --alt-text-color: #a1a3ae;
+}
 
 * {
     margin: 0;
@@ -11,8 +19,9 @@ html {
     font-family: -apple-system, BlinkMacSystemFont, "Roboto", sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    color: #333;
+    color: var(--main-text-color);
     font-size: 100%;
+    background-color: var(--main-bg-color);
 }
 
 p {
@@ -21,7 +30,7 @@ p {
     line-height: 1.5rem;
 }
 
-button,
+/* button,
 input {
     color: inherit;
     font-family: "Roboto", sans-serif;
@@ -46,21 +55,7 @@ button:hover {
 
 button:active {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.35);
-}
-
-.cogoButton {
-    height: 3em;
-    background-color: #e1a700;
-    color: white;
-    text-shadow: 2px 2px #0001;
-}
-
-h1 {
-    font-size: 3rem;
-    line-height: 2rem;
-    font-family: "Merienda", cursive;
-    font-style: italic;
-}
+} */
 
 a {
     text-decoration: none;
@@ -69,43 +64,43 @@ a {
     transition: 0.15s ease-in-out;
 }
 
-a:hover {
-    color: #e1a700;
-}
-
-.flexBoxCenterColumn {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.defaultPageContainer {
-    max-width: 1250px;
-    padding: 0 25px 50px;
-    margin: auto;
-    display: flex;
-    flex-direction: column;
-}
-
-.BlockHeader {
-    text-align: center;
-    align-self: center;
-    font-size: 3rem;
-    color: #e1a700;
-
-    border-top: solid 5px #666;
-    border-bottom: solid 5px #666;
-    border-radius: 5px;
-    line-height: 1.3;
-    margin: 40px 10px;
-    padding: 6px 0 0;
-}
-
-.Error404Image {
-    width: 100%;
-}
-
-/* this reverts all css changes for everything rendered by the react markdown editor library */
+/* ############## CUSTOM MARKDOWN EDITOR CSS CHANGES ################# */
 .custom-html-style > * {
     all: revert;
+    color: var(--main-text-color);
 }
+
+.forum-md-editor {
+    margin: 20px;
+    font-size: 100px;
+}
+
+.forum-md-editor .rc-md-editor,
+.forum-md-editor .rc-md-editor .drop-wrap,
+.forum-md-editor .rc-md-editor .editor-container .sec-md .input,
+.forum-md-editor .list-item {
+    background-color: var(--main-box-bg-color);
+    border-color: var(--alt-box-bg-color);
+    color: var(--main-text-color);
+}
+.forum-md-editor .rc-md-editor .rc-md-navigation {
+    background-color: var(--alt-box-bg-color);
+    border-color: var(--alt-box-bg-color);
+}
+
+.forum-md-editor .list-item:hover {
+    background-color: var(--alt-box-bg-color) !important;
+}
+
+.forum-md-editor .rc-md-editor .rc-md-navigation .button-wrap .button {
+    color: #949494;
+}
+.forum-md-editor .rc-md-editor .rc-md-navigation .button-wrap .button.disabled {
+    color: var(--alt-box-bg-color);
+}
+
+.forum-md-editor .rc-md-editor .rc-md-navigation .button-wrap .button:hover {
+    color: #fff;
+}
+
+/* ################################################################### */

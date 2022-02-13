@@ -35,7 +35,7 @@ export default function Beitraege() {
     }, [idForum, idForeneintrag, trigger])
 
     return (
-        <div className={styles.dummyDiv}>
+        <div>
             <div> DHBW-Heidenheim -> Wirtschaftsinformatik -> B -> Webprogramierung -> Props</div>
 
             <h1>{akForenbeitrag ? akForenbeitrag[0].name : null}</h1>
