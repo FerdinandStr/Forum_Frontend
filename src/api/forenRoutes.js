@@ -10,9 +10,15 @@ function getForenById(queryParams) {
     return getReq("/foren", null, { params: queryParams })
 }
 
+//Get
+function getSubforen(forenId) {
+    console.log(forenId)
+    return getReq("/foren/" + forenId + "/unterforen", null, null)
+}
+
 //Delete
 function deleteForenById(forenId) {
     return postReq("/foren/" + forenId, null, { method: "delete" })
 }
 
-export { postForen, getForenById, deleteForenById }
+export { postForen, getForenById, getSubforen, deleteForenById }

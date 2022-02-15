@@ -11,7 +11,7 @@ function getForeneintraegeById(queryParams) {
 }
 
 function getBeitraegeForForeneintrag(idForeneintrag) {
-    return getReq("/foreneintraege/" + idForeneintrag + "/beitraege")
+    return getReq("/foreneintraege/" + idForeneintrag + "/beitraege", null, null)
 }
 
 //Delete
