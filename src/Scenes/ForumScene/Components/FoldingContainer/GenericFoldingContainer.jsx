@@ -18,7 +18,7 @@ import "./FoldingContainer.css"
 // maxHeight is only needed if your child element gets larger than 500px (maxHight default=500px => this is needed for smooth opening and closing)
 //##################################################################################################################################################//
 export function useFoldingContainerState(initialState) {
-    const [isOpen, setIsOpen] = useState(initialState === true ? false : true)
+    const [isOpen, setIsOpen] = useState(initialState === true ? true /*hier false  damit geschlossen zu beginn*/ : true)
 
     function changeOpen(value) {
         value === true || value === false ? setIsOpen(value) : setIsOpen((isOpen) => !isOpen)

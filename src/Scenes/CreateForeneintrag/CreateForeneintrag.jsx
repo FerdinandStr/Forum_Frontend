@@ -7,6 +7,7 @@ import { useParams, Link } from "react-router-dom"
 import Button from "@mui/material/Button"
 import TextField from "@mui/material/TextField"
 import MenuItem from "@mui/material/MenuItem"
+import { useNavigate } from "react-router"
 
 import InputLabel from "@mui/material/InputLabel"
 import Select from "@mui/material/Select"
@@ -17,11 +18,7 @@ import Select from "@mui/material/Select"
 
 export default function CreateForeneintrag() {
     /*-------------------------Weiter zum Komentarbereich----------------------------- */
-    const history = useHistory()
-    const routeChange = () => {
-        let path = "/home"
-        history.push(path)
-    }
+    const navigate = useNavigate()
     /*-------------------------Weiter zum Komentarbereich----------------------------- */
 
     let { idForum } = useParams()
@@ -60,6 +57,7 @@ export default function CreateForeneintrag() {
                     inhalt: initBeitrag,
                 }
                 postBeitraege(data_beitrag)
+                    .then(data => { navigate("/foren/" + idForum + "/foreneintraege/" + data.idBeitrag) })
             })
         }
     }
@@ -87,12 +85,12 @@ export default function CreateForeneintrag() {
             >
                 {kategories
                     ? kategories.map((kat) => {
-                          return (
-                              <MenuItem key={kat.idKategorie} value={kat}>
-                                  {kat.name}
-                              </MenuItem>
-                          )
-                      })
+                        return (
+                            <MenuItem key={kat.idKategorie} value={kat}>
+                                {kat.name}
+                            </MenuItem>
+                        )
+                    })
                     : null}
             </Select>
 

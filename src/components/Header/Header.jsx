@@ -24,15 +24,6 @@ function Header(props) {
             <div>
                 <img className={styles.Logo} src="/public/img/StudiForum_V1_transparent.svg" />
             </div>
-            <div>
-                <TextField
-                    id="outlined-basic"
-                    label="Outlined"
-                    variant="outlined"
-                    // value={searchInput}
-                    onChange={(e) => setSearchInput(event.target.value)}
-                />
-            </div>
             {loginUser ? (
                 <div>
                     <p>{loginUser.username}</p>

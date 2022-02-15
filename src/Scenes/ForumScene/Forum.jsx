@@ -17,14 +17,14 @@ export default function Forum() {
             .then((data) => {
                 setForen(data)
             })
-            .catch((data) => {})
+            .catch((data) => { })
 
         getForeneintraegeById({ idForum: idForum, idKategorie: "", idForeneintrag: "" })
             .then((data) => {
                 setEintraege(data)
                 console.log(data)
             })
-            .catch((data) => {})
+            .catch((data) => { })
     }, [idForum]) //foren, eintraege
 
     return (
@@ -32,18 +32,18 @@ export default function Forum() {
             <GenericFoldingContainer key={1} headlineComponent={<h2>{"Unterforen"}</h2>}>
                 {foren
                     ? foren.map((forum) => (
-                          <div className={styles.content}>
-                              <hr />
-                              <Link to={"/foren/" + forum.idForum}>{forum.name}</Link> -#- xXxAnzahl der Beiträge xXx -#- {forum.createdAt}
-                              <hr />
-                          </div>
-                      ))
+                        <div className={styles.content}>
+                            <hr />
+                            <Link to={"/foren/" + forum.idForum}>{forum.name}</Link> -#- xXxAnzahl der Beiträge xXx -#- {forum.createdAt}
+                            <hr />
+                        </div>
+                    ))
                     : null}
 
                 <div className={styles.content}>"Test 123"</div>
             </GenericFoldingContainer>
 
-            <GenericFoldingContainer key={2} headlineComponent={<h2>{"Diskussionen"}</h2>}>
+            <GenericFoldingContainer key={2} headlineComponent={<h2>{"Diskussionen"} </h2>}>
                 <div className={styles.content}>
                     <div className={styles.item}>
                         <img
@@ -60,13 +60,13 @@ export default function Forum() {
                     </div>
                     {eintraege
                         ? eintraege.map((eintrag) => (
-                              <div className={styles.content}>
-                                  <hr />
-                                  <Link to={"/foren/" + eintrag.idForum + "/foreneintraege/" + eintrag.idForeneintrag}>{eintrag.name} </Link>-#-{" "}
-                                  {eintrag.ersteller} -#- {eintrag.createdAt}
-                                  <hr />
-                              </div>
-                          ))
+                            <div className={styles.content}>
+                                <hr />
+                                <Link to={"/foren/" + eintrag.idForum + "/foreneintraege/" + eintrag.idForeneintrag}>{eintrag.name} </Link>-#-{" "}
+                                {eintrag.ersteller} -#- {eintrag.createdAt}
+                                <hr />
+                            </div>
+                        ))
                         : console.log(eintraege)}
                 </div>
             </GenericFoldingContainer>
