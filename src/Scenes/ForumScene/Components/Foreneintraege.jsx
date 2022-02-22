@@ -27,6 +27,8 @@ export default function Foreneintraege({ forumData }) {
         navigate("/foren/" + forumData + "/addForeneintrag")
     }
 
+    console.log(eintraege)
+
     return (
         <GenericFoldingContainer key={2} headlineComponent={<div><h2>{"Diskussionen"} </h2>
             <IconButton color="primary" aria-label="add Unterforum" component="span" > <AddCircleRoundedIcon /></IconButton></div>
@@ -49,8 +51,7 @@ function Foreneintrag({ eintrag }) {
     return (
         <div className={styles.content} key={eintrag.idForum}>
             <hr />
-            <Link to={"/foren/" + eintrag.idForum + "/foreneintraege/" + eintrag.idForeneintrag}>{eintrag.name} </Link>-#-{" "}
-            {eintrag.ersteller.name} -#- {eintrag.createdAt}
+            <Link to={"/foren/" + eintrag.idForum + "/foreneintraege/" + eintrag.idForeneintrag}>{eintrag.inhalt} </Link>{eintrag.ersteller.name} -#- {eintrag.createdAt}
             <hr />
         </div>
     )

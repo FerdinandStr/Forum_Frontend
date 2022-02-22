@@ -1,6 +1,7 @@
 import axios from "axios"
 
-const basePath = "http://localhost:3000"
+const basePath = "http://localhost:3000"  // son in DB /imege/pic/7.png
+
 
 axios.defaults.baseURL = basePath
 axios.defaults.withCredentials = true

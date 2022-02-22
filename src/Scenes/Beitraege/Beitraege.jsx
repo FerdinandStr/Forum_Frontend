@@ -6,6 +6,7 @@ import Beitrag from "./Beitrag"
 import BeitragCreator from "./BeitragCreator"
 import parseMdToHtml from "../../helper/parseMdToHtml"
 import useForceUpdate from "../../hooks/useForceUpdate"
+import DrillDownPath from "../../components/DrillDownPath/DrillDownPath"
 
 export default function Beitraege() {
     let { idForum, idForeneintrag } = useParams()
@@ -21,14 +22,14 @@ export default function Beitraege() {
                     setBeitragList(data)
                     console.log(data)
                 })
-                .catch((data) => {})
+                .catch((data) => { })
 
             getForeneintraegeById({ idForum: idForum, idForeneintrag: idForeneintrag })
                 .then((data) => {
                     setakForenbeitrag(data)
                     console.log(data)
                 })
-                .catch((data) => {})
+                .catch((data) => { })
         }
 
         getData()
@@ -36,7 +37,7 @@ export default function Beitraege() {
 
     return (
         <div>
-            <div> DHBW-Heidenheim -> Wirtschaftsinformatik -> B -> Webprogramierung -> Props</div>
+            <DrillDownPath forumData={idForum} />
 
             <h1>{akForenbeitrag ? akForenbeitrag[0].name : null}</h1>
             <div className={styles.content}>
