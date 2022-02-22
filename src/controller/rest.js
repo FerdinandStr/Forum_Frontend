@@ -1,6 +1,8 @@
 import axios from "axios"
 
-axios.defaults.baseURL = "http://localhost:3000"
+const basePath = "http://localhost:3000"
+
+axios.defaults.baseURL = basePath
 axios.defaults.withCredentials = true
 
 function getReq(url, data, opt) {
@@ -40,6 +42,6 @@ function handleError(e, reject) {
     }
 }
 
-function patchReq() {}
+function patchReq() { }
 
-export { getReq, postReq, patchReq }
+export { getReq, postReq, patchReq, basePath }

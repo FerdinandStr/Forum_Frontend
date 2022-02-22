@@ -5,7 +5,7 @@ import { useParams, Link } from "react-router-dom"
 import Button from "@mui/material/Button"
 import TextField from "@mui/material/TextField"
 import { useNavigate } from "react-router"
-// Achtung !!!! ParentID Muss Numeric sein + Name muss min. 5 Zeichen lang sein
+// Achtung !!!! ParentID Muss Numeric sein + Name muss min. 3 Zeichen lang sein
 // TODO !!!!!!
 
 export default function CreateUnterforum() {

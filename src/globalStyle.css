@@ -64,6 +64,14 @@ a {
     transition: 0.15s ease-in-out;
 }
 
+.defaultPageContainer {
+    max-width: 1250px;
+    padding: 0 25px 50px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+}
+
 /* ############## CUSTOM MARKDOWN EDITOR CSS CHANGES ################# */
 .custom-html-style > * {
     all: revert;

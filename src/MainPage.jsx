@@ -3,7 +3,6 @@ import { Navigate, Route, Routes } from "react-router"
 import Footer from "./components/Footer"
 import Header from "./components/Header/Header"
 import { SideMenu, useSideMenuState } from "./components/SideMenu/SideMenu"
-import useSearchResult from "./hooks/useSearchResult"
 import CreateUnterforum from "./Scenes/CreateUnterforum/CreateUnterforum"
 import CreateForeneintrag from "./Scenes/CreateForeneintrag/CreateForeneintrag"
 import Beitraege from "./Scenes/Beitraege/Beitraege"
@@ -14,13 +13,12 @@ import Forum from "./Scenes/ForumScene/Forum"
 function MainPage() {
     const useLogin = useLoginStatus()
 
-    const { items, setSearchInput } = useSearchResult()
     const sideMenuState = useSideMenuState()
     const [isSideMenuOpen, setSideMenuOpen] = sideMenuState
 
     return (
         <div>
-            <Header useLogin={useLogin} setSearchInput={setSearchInput} setSideMenuOpen={setSideMenuOpen} />
+            <Header useLogin={useLogin} setSideMenuOpen={setSideMenuOpen} />
             <SideMenu state={sideMenuState} />
 
             <Routes>

@@ -22,12 +22,12 @@ function Header(props) {
         <div className={styles.HeaderDiv}>
             <Button onClick={() => setSideMenuOpen(true)}>{"left"}</Button>
             <div>
-                <img className={styles.Logo} src="/public/img/StudiForum_V1_transparent.svg" />
+                <img className={styles.Logo} src="/img/StudiForum_V1_transparent.svg" />
             </div>
             {loginUser ? (
                 <div>
                     <p>{loginUser.username}</p>
-                    <Button onClick={logout}>Logout</Button>
+                    <Button variant="outlined" onClick={logout}>Logout</Button>
                 </div>
             ) : (
                 <Link to="/login">
