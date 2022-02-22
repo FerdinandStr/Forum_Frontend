@@ -7,6 +7,8 @@ import IconButton from '@mui/material/IconButton';
 import AddCircleRoundedIcon from '@mui/icons-material/AddCircleRounded';
 import { useNavigate } from "react-router"
 
+import { basePath } from '../../../controller/rest'
+
 export default function Foreneintraege({ forumData }) {
 
     const navigate = useNavigate()
@@ -34,10 +36,6 @@ export default function Foreneintraege({ forumData }) {
             <IconButton color="primary" aria-label="add Unterforum" component="span" > <AddCircleRoundedIcon /></IconButton></div>
         }>
             <div className={styles.content}>
-                <div className={styles.item}>
-                    <div className={styles.user}>
-                    </div>
-                </div>
                 {eintraege
                     ? eintraege.map((eintrag) => (
                         <Foreneintrag eintrag={eintrag} key={eintrag.idForum} />
@@ -49,10 +47,21 @@ export default function Foreneintraege({ forumData }) {
 
 function Foreneintrag({ eintrag }) {
     return (
-        <div className={styles.content} key={eintrag.idForum}>
-            <hr />
-            <Link to={"/foren/" + eintrag.idForum + "/foreneintraege/" + eintrag.idForeneintrag}>{eintrag.inhalt} </Link>{eintrag.ersteller.name} -#- {eintrag.createdAt}
-            <hr />
+        <div className={styles.item} key={eintrag.idForum}>
+
+            <div>
+                <img src={basePath + eintrag.ersteller.pfad} alt="NIF" className={styles.userPic} />
+            </div>
+            <div className={styles.userInfo}>
+                <div>Beitrag von </div>
+                <div> {eintrag.ersteller.erstellerName}</div>
+                <div>{eintrag.ersteller.studiengangKuerzel} </div>
+                <div> {eintrag.ersteller.studiengangKuerzel}</div>
+                <div> erstellt am {eintrag.createdAt} </div>
+            </div>
+            <div className={styles.topic}>
+                <Link to={"/foren/" + eintrag.idForum + "/foreneintraege/" + eintrag.idForeneintrag}>{eintrag.inhalt} </Link>{eintrag.ersteller.name} {eintrag.createdAt}
+            </div>
         </div>
     )
 }
