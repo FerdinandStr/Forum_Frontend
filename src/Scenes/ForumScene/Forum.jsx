@@ -14,10 +14,10 @@ export default function Forum() {
     idForum = idForum || 1
 
     return (
-        <div className='defaultPageContainer'>
+        <div className="defaultPageContainer">
             <DrillDownPath forumData={idForum} />
             <Subforum forumData={idForum} />
-            <Foreneintraege forumData={idForum} />
+            <Foreneintraege idForum={idForum} />
         </div>
     )
 }

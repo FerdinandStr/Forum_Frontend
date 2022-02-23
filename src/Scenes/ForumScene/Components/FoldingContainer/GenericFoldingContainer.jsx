@@ -11,14 +11,14 @@ import "./FoldingContainer.css"
 // </FoldingContainer>
 //
 // => if you don't need external state just use FoldingContainer without State
-// <FoldingContainer headlineComponent={<h2>Hello World</h2>} /*maxHeight={"600px"}*/>
+// <FoldingContainer initialOpen headlineComponent={<h2>Hello World</h2>} /*maxHeight={"600px"}*/>
 //     {component}
 // </FoldingContainer>
 //
 // maxHeight is only needed if your child element gets larger than 500px (maxHight default=500px => this is needed for smooth opening and closing)
 //##################################################################################################################################################//
-export function useFoldingContainerState(initialState) {
-    const [isOpen, setIsOpen] = useState(initialState === true ? true /*hier false  damit geschlossen zu beginn*/ : true)
+export function useFoldingContainerState(initialOpen) {
+    const [isOpen, setIsOpen] = useState(!!initialOpen)
 
     function changeOpen(value) {
         value === true || value === false ? setIsOpen(value) : setIsOpen((isOpen) => !isOpen)
@@ -27,9 +27,9 @@ export function useFoldingContainerState(initialState) {
 }
 
 export default function GenericFoldingContainer(props) {
-    const { isOpen, changeOpen, headlineComponent, maxHeight, children } = props
+    const { isOpen, changeOpen, headlineComponent, maxHeight, children, initialOpen } = props
 
-    const [internalIsOpen, internalChangeOpen] = useFoldingContainerState(isOpen === false ? isOpen : true)
+    const [internalIsOpen, internalChangeOpen] = useFoldingContainerState(!!initialOpen)
 
     function changeOpenState() {
         internalChangeOpen()
@@ -43,10 +43,10 @@ export default function GenericFoldingContainer(props) {
 
     return (
         <div className="FoldingContainer" style={{ maxHeight: maxHeight }} id={internalIsOpen ? "" : "ClosedContainer"}>
-            <div className="ContainerHeader" >
+            <div className="ContainerHeader" onClick={() => changeOpenState()}>
                 <div className="HeadlineDiv">{headlineComponent}</div>
-                <div className="FoldingIconDiv" >
-                    <AiOutlineCaretDown className="FoldingIcon" onClick={() => changeOpenState()} id={internalIsOpen ? "ContainerIconOpen" : ""} />
+                <div className="FoldingIconDiv">
+                    <AiOutlineCaretDown className="FoldingIcon" id={internalIsOpen ? "ContainerIconOpen" : ""} />
                 </div>
             </div>
             <div className="ContainerContent" id={internalIsOpen ? "" : "ClosedContent"}>

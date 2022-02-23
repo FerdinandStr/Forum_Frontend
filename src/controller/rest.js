@@ -1,7 +1,6 @@
 import axios from "axios"
 
-const basePath = "http://localhost:3000"  // son in DB /imege/pic/7.png
-
+const basePath = "http://localhost:3000"
 
 axios.defaults.baseURL = basePath
 axios.defaults.withCredentials = true
@@ -43,6 +42,6 @@ function handleError(e, reject) {
     }
 }
 
-function patchReq() { }
+function patchReq() {}
 
 export { getReq, postReq, patchReq, basePath }
