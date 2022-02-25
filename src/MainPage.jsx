@@ -9,6 +9,9 @@ import Beitraege from "./Scenes/Beitraege/Beitraege"
 import useLoginStatus from "./hooks/useLoginStatus"
 import LoginScene from "./Scenes/Login/LoginScene"
 import Forum from "./Scenes/ForumScene/Forum"
+import AGB from "./Scenes/AGB/AGB";
+import Impressum from "./Scenes/Impressum/Impressum";
+import Kontakt from "./Scenes/Kontakt/Kontakt";
 
 function MainPage() {
     const useLogin = useLoginStatus()
@@ -30,6 +33,10 @@ function MainPage() {
                 <Route path="/foren/:idForum/addForum" element={<CreateUnterforum />} />
                 <Route path="/foren/:idForum/addForeneintrag" element={<CreateForeneintrag />} />
                 <Route path="/foren/:idForum/foreneintraege/:idForeneintrag" element={<Beitraege />} />
+
+                <Route path="/kontakt" element={< Kontakt />} />
+                <Route path="/agb" element={< AGB />} />
+                <Route path="/impressum" element={< Impressum />} />
             </Routes>
             <Footer />
         </div>
