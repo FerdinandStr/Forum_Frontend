@@ -1,34 +1,33 @@
 import React, { useEffect, useState } from "react"
 import styles from ".././ForumScene.module.css"
-import GenericFoldingContainer from "./FoldingContainer/GenericFoldingContainer.jsx"
-import { getBeitraegeForForeneintrag } from "../../../api/foreneintragRoutes"
+import GenericFoldingContainer from "../../../components/FoldingContainer/GenericFoldingContainer.jsx"
 import { Link } from "react-router-dom"
 import IconButton from "@mui/material/IconButton"
 import { MdAddCircle } from "react-icons/md"
 import { useNavigate } from "react-router"
 
 import { basePath } from "../../../controller/rest"
+import { getForeneintraegeByForum } from "../../../api/forenRoutes"
 
 export default function Foreneintraege({ idForum }) {
     const navigate = useNavigate()
 
-    const [eintraege, setEintraege] = useState()
+    const [forneneintraege, setForeneintraege] = useState()
     useEffect(() => {
-        console.log(idForum)
-        getBeitraegeForForeneintrag(idForum)
+        getForeneintraegeByForum(idForum)
             .then((data) => {
-                setEintraege(data)
-                console.log(data)
+                setForeneintraege(data)
             })
-            .catch((data) => {})
+            .catch((err) => {
+                console.log("ERRROR!!!!", err)
+                setForeneintraege()
+            })
     }, [idForum])
 
     //onClick={changeToAddForenEintrag()}
     const changeToAddForenEintrag = (e) => {
         navigate("/foren/" + idForum + "/addForeneintrag")
     }
-
-    console.log(eintraege)
 
     return (
         <GenericFoldingContainer
@@ -59,28 +58,30 @@ export default function Foreneintraege({ idForum }) {
             }
         >
             <div className={styles.content}>
-                {eintraege ? eintraege.map((eintrag) => <Foreneintrag eintrag={eintrag} key={eintrag.idForum} />) : null}
+                {forneneintraege
+                    ? forneneintraege.map((forneneintrag) => <Foreneintrag forneneintrag={forneneintrag} key={"fe" + forneneintrag.idForeneintrag} />)
+                    : null}
             </div>
         </GenericFoldingContainer>
     )
 }
 
-function Foreneintrag({ eintrag }) {
+function Foreneintrag({ forneneintrag }) {
     return (
-        <div className={styles.item} key={eintrag.idForum}>
-            <div>
-                <img src={basePath + eintrag.ersteller.pfad} alt="NIF" className={styles.userPic} />
+        <div className={styles.item}>
+            <div className={styles.topic}>
+                <Link to={"/foren/" + forneneintrag.idForum + "/foreneintraege/" + forneneintrag.idForeneintrag}>{forneneintrag.name} </Link>
             </div>
             <div className={styles.userInfo}>
-                <div>Beitrag von </div>
-                <div> {eintrag.ersteller.erstellerName}</div>
-                <div>{eintrag.ersteller.studiengangKuerzel} </div>
-                <div> {eintrag.ersteller.studiengangKuerzel}</div>
-                <div> erstellt am {eintrag.createdAt} </div>
-            </div>
-            <div className={styles.topic}>
-                <Link to={"/foren/" + eintrag.idForum + "/foreneintraege/" + eintrag.idForeneintrag}>{eintrag.inhalt} </Link>
-                {eintrag.ersteller.name} {eintrag.createdAt}
+                <div>
+                    <div>
+                        <img src={basePath + forneneintrag.ersteller.pfad} alt="NIF" className={styles.userPic} />
+                    </div>
+                    <p>Beitrag von </p>
+                    <p title={forneneintrag.idErsteller}>{forneneintrag.erstellerName}</p>
+                    <p title={forneneintrag.studiengangName}>{forneneintrag.studiengangKuerzel}</p>
+                    <p> erstellt am {forneneintrag.createdAt} </p>
+                </div>
             </div>
         </div>
     )

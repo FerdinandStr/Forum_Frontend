@@ -5,8 +5,8 @@ const basePath = "http://localhost:3000"
 axios.defaults.baseURL = basePath
 axios.defaults.withCredentials = true
 
-function getReq(url, data, opt) {
-    const config = { method: "get", url, data, ...opt }
+function getReq(url, queryParams, opt) {
+    const config = { method: "get", url, params: queryParams, ...opt }
     return new Promise((resolve, reject) => {
         axios(config)
             .then((res) => {
