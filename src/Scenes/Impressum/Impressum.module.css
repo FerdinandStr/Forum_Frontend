@@ -6,8 +6,8 @@
 .item {
     display: flex;
     background-color: #585858;
-    margin-top: 1%;
-    margin-bottom: 1%;
+    /* margin-top: 1%;
+    margin-bottom: 1%; */
 }
 
 .userPic {
@@ -18,10 +18,10 @@
     box-shadow: 0 0px 5px 0px grey;
     transition: all 0.15s ease-in-out;
     border: 1px solid #555;
-    margin-left: 4%;
+    /* margin-left: 4%;
     margin-right: 4%;
     margin-top: 1%;
-    margin-bottom: 1%;
+    margin-bottom: 1%; */
 }
 
 .userInfo{
@@ -32,7 +32,7 @@
 }
 
 .topic{
-    margin-top: 2%;
+    /* margin-top: 2%;
     margin-left: 5%;
     margin-left: 5%;
-}
+} */
