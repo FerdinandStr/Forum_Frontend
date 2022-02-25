@@ -24,15 +24,15 @@
     margin-bottom: 1%; */
 }
 
-.userInfo{
+.userInfo {
     display: flex;
     flex-direction: column;
     margin-left: 10px;
     font-size: small;
 }
 
-.topic{
+.topic {
     /* margin-top: 2%;
     margin-left: 5%;
-    margin-left: 5%;
-} */
+    margin-left: 5%;*/
+}
