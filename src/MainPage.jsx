@@ -1,6 +1,6 @@
 import React from "react"
 import { Navigate, Route, Routes } from "react-router"
-import Footer from "./components/Footer"
+import Footer from "./components/Footer/Footer"
 import Header from "./components/Header/Header"
 import { SideMenu, useSideMenuState } from "./components/SideMenu/SideMenu"
 import CreateUnterforum from "./Scenes/CreateUnterforum/CreateUnterforum"

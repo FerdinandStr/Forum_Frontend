@@ -1,0 +1,11 @@
+.bottomFooterBar {
+    text-align: center;
+    padding: 25px;
+}
+
+.footerDiv {
+    padding-top: 15px;
+    background-attachment: fixed;
+    box-shadow: inset 0px 10px 30px 5px rgba(0, 0, 0, 0.75);
+    background-color: var(--alt-box-bg-color);
+}
