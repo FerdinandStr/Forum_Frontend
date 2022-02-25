@@ -10,8 +10,8 @@ function getForeneintraegeById(queryParams) {
     return getReq("/foreneintraege", null, { params: queryParams })
 }
 
-function getBeitraegeForForeneintrag(idForeneintrag) {
-    return getReq("/foreneintraege/" + idForeneintrag + "/beitraege", null, null)
+function getBeitraegeForForeneintrag(idForeneintrag, limit, offset) {
+    return getReq("/foreneintraege/" + idForeneintrag + "/beitraege", { limit, offset })
 }
 
 //Delete
