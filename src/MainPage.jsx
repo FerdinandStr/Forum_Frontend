@@ -27,7 +27,7 @@ function MainPage() {
             <Routes>
                 <Route path="/" element={<Navigate to="/foren" />} />
                 <Route path="/login" element={<LoginScene useLogin={useLogin} />} />
-                <Route path="foren">
+                <Route path="foren" element={<Forum />}>
                     <Route path=":idForum" element={<Forum />} />
                 </Route>
                 <Route path="/foren/:idForum/addForum" element={<CreateUnterforum />} />
