@@ -21,7 +21,6 @@ function postReq(url, data, opt) {
     return new Promise((resolve, reject) => {
         axios(config)
             .then((res) => {
-                console.log("RES DATA", res.data)
                 resolve(res.data)
             })
             .catch((e) => handleError(e, reject))

@@ -1,15 +1,15 @@
 import { MenuItem, Pagination as MuiPagination, Select } from "@mui/material"
-import { useState } from "react"
+import React, { useState } from "react"
 import styles from "./Pagination.module.css"
 
 export function usePaginationState(elementCount, defaultPage, defaultLimit) {
     const [pageState, setPageState] = useState({
         page: defaultPage || 1,
-        limit: defaultLimit || 10,
+        limit: defaultLimit || 10
     })
 
     const { page, limit } = pageState
-    const pageCount = Math.floor(elementCount / limit) || 1
+    const pageCount = Math.ceil(elementCount / limit) || 1
     const offset = limit * (page - 1)
 
     function updateState(obj) {

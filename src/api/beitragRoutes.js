@@ -7,12 +7,16 @@ function postBeitraege(data) {
 
 //Get
 function getBeitraege(queryParams) {
-    return getReq("/beitraege", null, { params: queryParams })
+    return getReq("/beitraege", queryParams)
 }
 
 //Delete
 function deleteBeitraege(katId) {
-    return postReq("/beitraege/" + katnId, null, { method: "delete" })
+    return postReq("/beitraege/" + katId, null, { method: "delete" })
 }
 
-export { postBeitraege, getBeitraege, deleteBeitraege }
+function countBeitraege({ idForum, idForeneintrag, ersteller }) {
+    return getReq("/beitraege/count", { idForum, idForeneintrag, ersteller })
+}
+
+export { postBeitraege, getBeitraege, deleteBeitraege, countBeitraege }

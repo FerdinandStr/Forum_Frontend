@@ -8,6 +8,7 @@ import parseMdToHtml from "../../helper/parseMdToHtml"
 import useForceUpdate from "../../hooks/useForceUpdate"
 import DrillDownPath from "../../components/DrillDownPath/DrillDownPath"
 import Pagination, { usePaginationState } from "../../components/Pagination/Pagination"
+import { countBeitraege } from "../../api/beitragRoutes"
 
 export default function Beitraege() {
     let { idForum, idForeneintrag } = useParams()
@@ -16,15 +17,17 @@ export default function Beitraege() {
     const [beitragList, setBeitragList] = useState()
     const [trigger, forceUpdate] = useForceUpdate()
     //pagination data
-    const paginationState = usePaginationState(61, null, 10)
+    const [beitragCount, setBeitragCount] = useState(0)
+    const paginationState = usePaginationState(beitragCount)
     const { limit, offset } = paginationState[0]
 
     useEffect(() => {
         function getData() {
+            countBeitraege({ idForeneintrag }).then((count) => setBeitragCount(count))
+
             getBeitraegeForForeneintrag(idForeneintrag, limit, offset)
                 .then((data) => {
                     setBeitragList(data)
-                    console.log(data)
                 })
                 .catch((err) => {
                     console.log("ERRROR", err)
@@ -39,7 +42,6 @@ export default function Beitraege() {
         getForeneintraegeById({ idForeneintrag: idForeneintrag })
             .then((data) => {
                 setForeneintragData(data)
-                console.log(data)
             })
             .catch((data) => {})
     }, [idForum, idForeneintrag])
@@ -53,9 +55,11 @@ export default function Beitraege() {
             <Pagination externalPaginationState={paginationState} />
 
             <div className={styles.content}>
-                {beitragList
-                    ? beitragList.map((beitrag) => <Beitrag key={beitrag.idBeitrag} parseMdToHtml={parseMdToHtml} beitragData={beitrag} />)
-                    : console.log(beitragList)}
+                {beitragList ? (
+                    beitragList.map((beitrag) => <Beitrag key={beitrag.idBeitrag} parseMdToHtml={parseMdToHtml} beitragData={beitrag} />)
+                ) : (
+                    <div>Fehler, keine Beiträge</div>
+                )}
             </div>
 
             <Pagination externalPaginationState={paginationState} />

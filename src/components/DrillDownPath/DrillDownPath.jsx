@@ -9,7 +9,6 @@ export default function DrillDownPath(forumData) {
     const [result, setResult] = useState()
 
     useEffect(() => {
-        console.log(idForum)
         getParentPath(idForum)
             .then((data) => {
                 let ids = data.id_path.split("->")
@@ -18,8 +17,8 @@ export default function DrillDownPath(forumData) {
                 ids.forEach((id, i) => res_tmp.push({ id: id, name: names[i] }))
                 setResult(res_tmp)
             })
-            .catch((data) => {
-                console.log(data)
+            .catch((err) => {
+                console.log("ERR drill down", err)
             })
     }, [forumData])
 
