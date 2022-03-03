@@ -3,6 +3,8 @@
     background: var(--box-bg-alt);
     padding: 10px;
     margin-bottom: 25px;
+    
+    justify-content: space-between;
 }
 
 .Logo {

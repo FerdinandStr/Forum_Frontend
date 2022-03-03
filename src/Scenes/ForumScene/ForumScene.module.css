@@ -1,38 +1,13 @@
-.content {
-    padding: 10px 25px;
-    border-radius: 4px;
-}
-
-.item {
-    display: flex;
-    /* background: #585858; */
-    /* margin-top: 1%;
-    margin-bottom: 1%; */
-}
-
-.userPic {
+.inner{
     display: block;
-    max-width: 250px;
-    width: 50px;
-    height: 50px;
-    box-shadow: 0 0px 5px 0px grey;
-    transition: all 0.15s ease-in-out;
-    border: 1px solid #555;
-    /* margin-left: 4%;
-    margin-right: 4%;
-    margin-top: 1%;
-    margin-bottom: 1%; */
 }
 
-.userInfo {
-    display: flex;
-    flex-direction: column;
-    margin-left: 10px;
-    font-size: small;
+.header{
+    position: relative;
 }
 
-.topic {
-    /* margin-top: 2%;
-    margin-left: 5%;
-    margin-left: 5%; */
+.item{
+    display: block;
+    list-style-type: none;
+    margin: 0;
 }

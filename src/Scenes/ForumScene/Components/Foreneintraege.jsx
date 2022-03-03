@@ -8,21 +8,28 @@ import { useNavigate } from "react-router"
 
 import { basePath } from "../../../controller/rest"
 import { getForeneintraegeByForum } from "../../../api/forenRoutes"
+import Pagination, { usePaginationState } from "../../../components/Pagination/Pagination"
+import { countBeitraege } from "../../../api/beitragRoutes"
 
 export default function Foreneintraege({ idForum }) {
     const navigate = useNavigate()
 
+    const [beitragCount, setBeitragCount] = useState(0)
+    const paginationState = usePaginationState(beitragCount)
+    const { limit, offset } = paginationState[0]
+
     const [forneneintraege, setForeneintraege] = useState()
     useEffect(() => {
-        getForeneintraegeByForum(idForum)
+        getForeneintraegeByForum(idForum, limit, offset)
             .then((data) => {
+                console.log(data)
                 setForeneintraege(data)
             })
             .catch((err) => {
                 console.log("ERRROR!!!!", err)
                 setForeneintraege()
             })
-    }, [idForum])
+    }, [idForum, limit, offset])
 
     //onClick={changeToAddForenEintrag()}
     const changeToAddForenEintrag = (e) => {
@@ -30,39 +37,30 @@ export default function Foreneintraege({ idForum }) {
     }
 
     return (
-        <GenericFoldingContainer
-            key={2}
-            // cooool neu, standard open
-            initialOpen
-            headlineComponent={
-                <div>
-                    <h2>{"Diskussionen"} </h2>
-                    <Link to={`/foren/${idForum}/addForeneintrag`}>
-                        <IconButton
-                            color="primary"
-                            aria-label="add Unterforum"
-                            component="span"
-                            onClick={(event) => {
-                                // stop click event from going up to parent element (Nicht benötigt wenn weitergeleitet wird)
-                                event.stopPropagation()
-                                console.log("Grüße Manni", event)
-                                //TODO entweder navigate hier oder <Link> benutzen
-                                //Berechtigung? => Am besten Button garnicht rein reichen in headlineComponent
-                            }}
-                        >
-                            {/* Icons, auch MaterialDesign von https://react-icons.github.io/react-icons/search?q=addcircle */}
-                            <MdAddCircle />
-                        </IconButton>
-                    </Link>
-                </div>
-            }
-        >
+        <div>
+            <Pagination externalPaginationState={paginationState} />
+            <div className={styles.ContainerHeader}>
+                <h2>{"Diskussionen"} </h2>
+                <Link to={`/foren/${idForum}/addForeneintrag`}>
+                    <IconButton
+                        color="primary"
+                        aria-label="add Unterforum"
+                        component="span"
+                    >
+                        {/* Icons, auch MaterialDesign von https://react-icons.github.io/react-icons/search?q=addcircle */}
+                        <MdAddCircle />
+                    </IconButton>
+                </Link>
+            </div>
             <div className={styles.content}>
                 {forneneintraege
                     ? forneneintraege.map((forneneintrag) => <Foreneintrag forneneintrag={forneneintrag} key={"fe" + forneneintrag.idForeneintrag} />)
                     : null}
             </div>
-        </GenericFoldingContainer>
+            <Pagination externalPaginationState={paginationState} />
+        </div>
+
+
     )
 }
 

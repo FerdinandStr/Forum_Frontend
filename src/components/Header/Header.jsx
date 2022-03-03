@@ -20,7 +20,6 @@ function Header(props) {
 
     return (
         <div className={styles.HeaderDiv}>
-            <Button onClick={() => setSideMenuOpen(true)}>{"left"}</Button>
             <div>
                 <img className={styles.Logo} src="/img/StudiForum_V1_transparent.svg" />
             </div>
