@@ -1,6 +1,6 @@
 .HeaderDiv {
     display: flex;
-    background-color: var(--alt-box-bg-color);
+    background: var(--box-bg-alt);
     padding: 10px;
     margin-bottom: 25px;
 }

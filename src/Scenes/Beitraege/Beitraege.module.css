@@ -1,4 +1,6 @@
-.content {
-    padding: 10px 25px;
-    border-radius: 4px;
+.BeitraegeContainer {
+    display: flex;
+    flex-direction: column;
+    padding: 5px 10px;
+    background: var(--box-bg-alt);
 }

@@ -54,7 +54,7 @@ export default function Beitraege() {
 
             <Pagination externalPaginationState={paginationState} />
 
-            <div className={styles.content}>
+            <div className={styles.BeitraegeContainer}>
                 {beitragList ? (
                     beitragList.map((beitrag) => <Beitrag key={beitrag.idBeitrag} parseMdToHtml={parseMdToHtml} beitragData={beitrag} />)
                 ) : (

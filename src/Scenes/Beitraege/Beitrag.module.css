@@ -1,9 +1,10 @@
 .BeitragDiv {
     display: flex;
-    background-color: var(--main-box-bg-color);
+    background: var(--box-bg-main);
+    margin: 5px 0;
 }
 .BeitragContentArea {
-    padding: 5px;
+    padding: 15px;
     flex: auto;
 }
 
@@ -16,7 +17,7 @@
 
 .ErstellerDiv {
     height: 100%;
-    background-color: var(--alt2-box-bg-color);
+    background: var(--box-bg-alt2);
 }
 
 .BeitragInhalt > * {

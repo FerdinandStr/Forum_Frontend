@@ -1,12 +1,31 @@
 /* @import url("https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"); */
 
 :root {
-    --main-bg-color: #24272c;
-    --main-box-bg-color: #2d3036;
-    --alt-box-bg-color: #1b1d21;
-    --alt2-box-bg-color: rgb(57, 61, 67);
-    --main-text-color: #fff;
-    --alt-text-color: #a1a3ae;
+    /* Hallo Manni, bitte diese Variablen verwenden :) */
+
+    /* NUR für globalen Hintergrund ganz außen */
+    /* aktuell "dunkelgrau" */
+    --bg-main: #353c40;
+
+    /* Für Hintergrund von Boxen mit Text usw. */
+    /* aktuell "hellgrau" */
+    --box-bg-main: #485257;
+
+    /* Für Box akzent Farbe/Hintergrund mit gleicher Farbe wie globaler Hintergrund */
+    /* aktuell "dunkelgrau" */
+    --box-bg-alt: #353c40;
+
+    /* Alternativ falls eine weitere Box Hintergrund farbe benötigt wird */
+    --box-bg-alt2: red;
+
+    /* Nur für Box header mit Farbverlauf (oder alles mit farbverlauf) */
+    --box-bg-gradient: linear-gradient(90deg, rgba(227, 0, 27, 1) 0%, rgba(124, 137, 145, 1) 71%, rgba(92, 105, 113, 1) 100%);
+
+    /* globale Textfarbe */
+    --text-main-color: #f2f2f2;
+    /* alternative Textfarbe */
+    --text-alt-color: #a1a3ae;
+    /* >>> hier weitere gleichartige Textfarb-variablen hinzufügen für z.B. Header, Links, abgedunkelter text... */
 }
 
 * {
@@ -19,9 +38,9 @@ html {
     font-family: -apple-system, BlinkMacSystemFont, "Roboto", sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    color: var(--main-text-color);
+    color: var(--text-main-color);
     font-size: 100%;
-    background-color: var(--main-bg-color);
+    background: var(--bg-main);
 }
 
 p {
@@ -65,17 +84,18 @@ a {
 }
 
 .defaultPageContainer {
-    max-width: 1250px;
-    padding: 0 25px 50px;
+    max-width: 1200px;
+    padding: 20px;
     margin: auto;
     display: flex;
     flex-direction: column;
+    background-color: var(--box-bg-main);
 }
 
 /* ############## CUSTOM MARKDOWN EDITOR CSS CHANGES ################# */
 .custom-html-style > * {
     all: revert;
-    color: var(--main-text-color);
+    color: var(--text-main-color);
 }
 
 .forum-md-editor {
@@ -87,24 +107,24 @@ a {
 .forum-md-editor .rc-md-editor .drop-wrap,
 .forum-md-editor .rc-md-editor .editor-container .sec-md .input,
 .forum-md-editor .list-item {
-    background-color: var(--main-box-bg-color);
-    border-color: var(--alt-box-bg-color);
-    color: var(--main-text-color);
+    background: var(--box-bg-main);
+    border-color: var(--box-bg-alt);
+    color: var(--text-main-color);
 }
 .forum-md-editor .rc-md-editor .rc-md-navigation {
-    background-color: var(--alt-box-bg-color);
-    border-color: var(--alt-box-bg-color);
+    background: var(--box-bg-alt);
+    border-color: var(--box-bg-alt);
 }
 
 .forum-md-editor .list-item:hover {
-    background-color: var(--alt-box-bg-color) !important;
+    background: var(--box-bg-alt) !important;
 }
 
 .forum-md-editor .rc-md-editor .rc-md-navigation .button-wrap .button {
     color: #949494;
 }
 .forum-md-editor .rc-md-editor .rc-md-navigation .button-wrap .button.disabled {
-    color: var(--alt-box-bg-color);
+    color: var(--box-bg-alt);
 }
 
 .forum-md-editor .rc-md-editor .rc-md-navigation .button-wrap .button:hover {

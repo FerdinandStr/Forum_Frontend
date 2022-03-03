@@ -5,7 +5,7 @@
 
 .item {
     display: flex;
-    background-color: #585858;
+    /* background: #585858; */
     /* margin-top: 1%;
     margin-bottom: 1%; */
 }

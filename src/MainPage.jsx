@@ -24,20 +24,23 @@ function MainPage() {
             <Header useLogin={useLogin} setSideMenuOpen={setSideMenuOpen} />
             <SideMenu state={sideMenuState} />
 
-            <Routes>
-                <Route path="/" element={<Navigate to="/foren" />} />
-                <Route path="/login" element={<LoginScene useLogin={useLogin} />} />
-                <Route path="foren" element={<Forum />}>
-                    <Route path=":idForum" element={<Forum />} />
-                </Route>
-                <Route path="/foren/:idForum/addForum" element={<CreateUnterforum />} />
-                <Route path="/foren/:idForum/addForeneintrag" element={<CreateForeneintrag />} />
-                <Route path="/foren/:idForum/foreneintraege/:idForeneintrag" element={<Beitraege />} />
+            <div className={"defaultPageContainer"}>
+                <Routes>
+                    <Route path="/" element={<Navigate to="/foren" />} />
+                    <Route path="/login" element={<LoginScene useLogin={useLogin} />} />
+                    <Route path="foren" element={<Forum />}>
+                        <Route path=":idForum" element={<Forum />} />
+                    </Route>
+                    <Route path="/foren/:idForum/addForum" element={<CreateUnterforum />} />
+                    <Route path="/foren/:idForum/addForeneintrag" element={<CreateForeneintrag />} />
+                    <Route path="/foren/:idForum/foreneintraege/:idForeneintrag" element={<Beitraege />} />
 
-                <Route path="/kontakt" element={<Kontakt />} />
-                <Route path="/agb" element={<AGB />} />
-                <Route path="/impressum" element={<Impressum />} />
-            </Routes>
+                    <Route path="/kontakt" element={<Kontakt />} />
+                    <Route path="/agb" element={<AGB />} />
+                    <Route path="/impressum" element={<Impressum />} />
+                </Routes>
+            </div>
+
             <Footer />
         </div>
     )

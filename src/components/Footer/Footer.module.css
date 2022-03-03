@@ -5,5 +5,5 @@
 
 .footerDiv {
     padding-top: 15px;
-    background-color: var(--alt-box-bg-color);
+    background: var(--box-bg-alt);
 }

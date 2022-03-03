@@ -1,10 +1,10 @@
 import { Alert, Button, FormControlLabel, FormGroup, Switch, TextField } from "@mui/material"
-import { useState } from "react"
+import React, { useState } from "react"
 import { useNavigate } from "react-router"
 import { userLogin, userRegister } from "../../api/authRoutes"
 import styles from "./LoginScene.module.css"
 
-import Checkbox from '@mui/material/Checkbox';
+import Checkbox from "@mui/material/Checkbox"
 
 export default function LoginScene(props) {
     const navigate = useNavigate()
@@ -125,7 +125,6 @@ export default function LoginScene(props) {
             <div>
                 <FormGroup>
                     <FormControlLabel control={<Checkbox />} label="Ich habe die AGBs gelesen" />
-
                 </FormGroup>
             </div>
             <Button variant="contained" onClick={tryRegister}>
