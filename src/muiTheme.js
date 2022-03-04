@@ -1,8 +1,5 @@
 import { createTheme } from "@mui/material/styles"
 //https://bareynol.github.io/mui-theme-creator/
-import styles from "./globalStyle.css"
-
-console.log(styles)
 
 export const theme = createTheme({
     palette: {
@@ -12,11 +9,14 @@ export const theme = createTheme({
             // light: "#c56466"
         },
         secondary: {
-            // main: "#f50057"
+            main: "#0f8e88"
         },
         background: {
             default: "var(--bg-main)",
             paper: "var(--box-bg-main)"
+        },
+        text: {
+            primary: "#f2f2f2" //SET MANUAL!!!
         }
     }
 })

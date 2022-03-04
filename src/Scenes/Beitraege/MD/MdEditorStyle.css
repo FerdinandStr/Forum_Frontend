@@ -1,0 +1,44 @@
+/* ############## CUSTOM MARKDOWN EDITOR CSS CHANGES ################# */
+.custom-html-style > * {
+    all: revert;
+    color: var(--text-main-color);
+}
+
+.forum-md-editor {
+    margin: 25px 0;
+    text-align: center;
+}
+
+.forum-md-editor > button {
+    margin-top: 25px;
+}
+
+.forum-md-editor .rc-md-editor,
+.forum-md-editor .rc-md-editor .drop-wrap,
+.forum-md-editor .rc-md-editor .editor-container .sec-md .input,
+.forum-md-editor .list-item {
+    background: var(--box-bg-main);
+    border-color: var(--box-bg-alt);
+    color: var(--text-main-color);
+}
+.forum-md-editor .rc-md-editor .rc-md-navigation {
+    background: var(--box-bg-alt);
+    border-color: var(--box-bg-alt);
+}
+
+.forum-md-editor .list-item:hover {
+    background: var(--box-bg-alt) !important;
+}
+
+.forum-md-editor .rc-md-editor .rc-md-navigation .button-wrap .button {
+    color: #949494;
+}
+.forum-md-editor .rc-md-editor .rc-md-navigation .button-wrap .button.disabled {
+    color: var(--box-bg-alt);
+}
+
+.forum-md-editor .rc-md-editor .rc-md-navigation .button-wrap .button:hover {
+    color: #fff;
+}
+
+/* ################################################################### */

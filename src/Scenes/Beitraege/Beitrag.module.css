@@ -2,24 +2,46 @@
     display: flex;
     background: var(--box-bg-main);
     margin: 5px 0;
+    border-bottom: 1px solid var(--box-highlight);
+    padding: 15px;
 }
 .BeitragContentArea {
-    padding: 15px;
     flex: auto;
 }
 
 .BeitragHeader {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 5px;
-    border-bottom: 1px lightgray solid;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px var(--box-highlight) solid;
+    font-size: 0.9rem;
+    color: var(--text-alt-color);
+}
+.DateDiv,
+.DateDiv > svg {
+    display: flex;
+    align-items: center;
+    margin-right: 5px;
 }
 
 .ErstellerDiv {
     height: 100%;
-    background: var(--box-bg-alt2);
+    min-height: 150px;
+    min-width: 150px;
+    /* background: var(--box-bg-alt2); */
+    text-align: center;
+    margin-right: 15px;
+    padding-right: 15px;
+    border-right: 1px solid var(--box-highlight);
 }
 
 .BeitragInhalt > * {
     all: revert;
+}
+
+.BlockieProfil {
+    margin: 5px;
+    border-radius: 5px;
 }

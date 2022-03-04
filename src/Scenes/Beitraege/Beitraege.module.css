@@ -4,3 +4,13 @@
     padding: 5px 10px;
     background: var(--box-bg-alt);
 }
+
+.BeitragHeader {
+    margin: 25px 0;
+}
+
+.PaginationBar {
+    display: flex;
+    justify-content: space-between;
+    margin: 25px 0;
+}

@@ -1,18 +1,29 @@
-import DOMPurify from "dompurify"
 import React from "react"
 import styles from "./Beitrag.module.css"
+import { MdOutlineWatchLater } from "react-icons/md"
+import Blockies from "react-blockies"
 
-export default function Beitrag({ beitragData, parseMdToHtml }) {
+export default function Beitrag({ beitragData, parseMdToHtml, i }) {
     const { idBeitrag, inhalt, createdAt, ersteller } = beitragData
 
     return (
         <div className={styles.BeitragDiv}>
             <div>
-                <Ersteller ersteller={ersteller} />
+                <Ersteller ersteller={ersteller} i={i} />
             </div>
             <div className={styles.BeitragContentArea}>
                 <div className={styles.BeitragHeader}>
-                    <div>{createdAt}</div>
+                    <div className={styles.DateDiv}>
+                        <MdOutlineWatchLater />
+                        {new Date(createdAt).toLocaleString([], {
+                            weekday: "long",
+                            year: "numeric",
+                            month: "numeric",
+                            day: "numeric",
+                            hour: "numeric",
+                            minute: "numeric"
+                        })}
+                    </div>
                     <div>{"# " + idBeitrag}</div>
                 </div>
                 <div className={styles.BeitragInhalt} dangerouslySetInnerHTML={{ __html: parseMdToHtml(inhalt) }} />
@@ -24,9 +35,12 @@ export default function Beitrag({ beitragData, parseMdToHtml }) {
 
 function Ersteller({ ersteller }) {
     const { idErsteller, erstellerName, studiengangKuerzel, studiengangName } = ersteller
+
     return (
         <div className={styles.ErstellerDiv}>
-            <div>Picture</div>
+            <div>
+                <Blockies seed={idErsteller + erstellerName} size={10} scale={10} className={styles.BlockieProfil} />
+            </div>
             <div>
                 {/* //TODO remove id later */}
                 <p title={idErsteller}>{erstellerName}</p>

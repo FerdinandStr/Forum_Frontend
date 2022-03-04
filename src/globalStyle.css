@@ -14,7 +14,7 @@
     /* Für Box akzent Farbe/Hintergrund mit gleicher Farbe wie globaler Hintergrund */
     /* aktuell "dunkelgrau" */
     --box-bg-alt: #353c40;
-
+    --box-highlight: #656e74de;
     /* Alternativ falls eine weitere Box Hintergrund farbe benötigt wird */
     --box-bg-alt2: red;
 
@@ -23,8 +23,9 @@
 
     /* globale Textfarbe */
     --text-main-color: #f2f2f2;
+    /* --text-main-color: white; */
     /* alternative Textfarbe */
-    --text-alt-color: #a1a3ae;
+    --text-alt-color: #f2f2f2d5;
     /* >>> hier weitere gleichartige Textfarb-variablen hinzufügen für z.B. Header, Links, abgedunkelter text... */
 }
 
@@ -95,44 +96,3 @@ a:hover {
     flex-direction: column;
     background-color: var(--box-bg-main);
 }
-
-/* ############## CUSTOM MARKDOWN EDITOR CSS CHANGES ################# */
-.custom-html-style > * {
-    all: revert;
-    color: var(--text-main-color);
-}
-
-.forum-md-editor {
-    margin: 20px;
-    font-size: 100px;
-}
-
-.forum-md-editor .rc-md-editor,
-.forum-md-editor .rc-md-editor .drop-wrap,
-.forum-md-editor .rc-md-editor .editor-container .sec-md .input,
-.forum-md-editor .list-item {
-    background: var(--box-bg-main);
-    border-color: var(--box-bg-alt);
-    color: var(--text-main-color);
-}
-.forum-md-editor .rc-md-editor .rc-md-navigation {
-    background: var(--box-bg-alt);
-    border-color: var(--box-bg-alt);
-}
-
-.forum-md-editor .list-item:hover {
-    background: var(--box-bg-alt) !important;
-}
-
-.forum-md-editor .rc-md-editor .rc-md-navigation .button-wrap .button {
-    color: #949494;
-}
-.forum-md-editor .rc-md-editor .rc-md-navigation .button-wrap .button.disabled {
-    color: var(--box-bg-alt);
-}
-
-.forum-md-editor .rc-md-editor .rc-md-navigation .button-wrap .button:hover {
-    color: #fff;
-}
-
-/* ################################################################### */
