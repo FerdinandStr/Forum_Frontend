@@ -2,30 +2,30 @@ import { useEffect, useState } from "react"
 import { useNavigate } from "react-router"
 import { postReq } from "../controller/rest"
 
-function useLoginStatus(username, userId) {
-    // STUB !!!
-    return ["user", () => console.log("CheckLoginStub")]
-}
-
-function useLoginStatusOriginal(username, userId) {
+function useLoginStatus(username, idbenutzer) {
     const navigate = useNavigate()
-    const [loginUser, setLoginUser] = useState({ username, userId })
+    const [loginUser, setLoginUser] = useState({ username, idbenutzer })
 
-    function checkLogin() {
-        postReq("/users/checkLogin")
-            .then((data) => {
-                setLoginUser({ username: data.username, userId: data._id })
-            })
-            .catch((e) => {
-                console.log("ERROR", e)
-                setLoginUser(null)
-                navigate("../login", { replace: true })
-            })
+    function checkLogin(openLogin, loginOverwrite) {
+        if (loginOverwrite) {
+            setLoginUser(loginOverwrite)
+        } else {
+            postReq("/benutzer/checkLogin")
+                .then((data) => {
+                    console.log("info", data)
+                    setLoginUser({ idbenutzer: data.id })
+                })
+                .catch((e) => {
+                    console.log("ERROR", e)
+                    setLoginUser(null)
+                    openLogin ? navigate("../login", { replace: true }) : null
+                })
+        }
     }
 
     useEffect(() => {
         checkLogin()
-    }, [])
+    }, [idbenutzer])
 
     return [loginUser, checkLogin]
 }

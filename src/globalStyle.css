@@ -80,7 +80,11 @@ a {
     text-decoration: none;
     cursor: pointer;
     color: inherit;
+    color: #d9a91a;
     transition: 0.15s ease-in-out;
+}
+a:hover {
+    color: #d9cf1a;
 }
 
 .defaultPageContainer {

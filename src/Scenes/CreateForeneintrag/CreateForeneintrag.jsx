@@ -48,16 +48,17 @@ export default function CreateForeneintrag() {
             let data_forum = {
                 idForum: paresedId,
                 name: name,
-                idKategorie: selectedKategorie.id_kategorie,
+                idKategorie: selectedKategorie.id_kategorie
             }
             postForeneintraege(data_forum).then((res) => {
                 let data_beitrag = {
                     idForum: paresedId,
                     idForeneintrag: res.idForeneintrag,
-                    inhalt: initBeitrag,
+                    inhalt: initBeitrag
                 }
-                postBeitraege(data_beitrag)
-                    .then(data => { navigate("/foren/" + idForum + "/foreneintraege/" + data.idBeitrag) })
+                postBeitraege(data_beitrag).then((data) => {
+                    navigate("/foren/" + idForum + "/foreneintraege/" + data.idBeitrag)
+                })
             })
         }
     }
@@ -85,12 +86,12 @@ export default function CreateForeneintrag() {
             >
                 {kategories
                     ? kategories.map((kat) => {
-                        return (
-                            <MenuItem key={kat.idKategorie} value={kat}>
-                                {kat.name}
-                            </MenuItem>
-                        )
-                    })
+                          return (
+                              <MenuItem key={kat.idKategorie} value={kat}>
+                                  {kat.name}
+                              </MenuItem>
+                          )
+                      })
                     : null}
             </Select>
 

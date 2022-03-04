@@ -23,9 +23,11 @@ export default function CreateUnterforum() {
 
         let data = {
             name: name,
-            idParentForum: paresedId,
+            idParentForum: paresedId
         }
-        postForen(data).then(data => { navigate("/foren/" + data.idForum) })
+        postForen(data).then((data) => {
+            navigate("/foren/" + data.idForum)
+        })
     }
 
     return (

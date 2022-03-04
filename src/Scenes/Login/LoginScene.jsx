@@ -5,16 +5,25 @@ import { userLogin, userRegister } from "../../api/authRoutes"
 import styles from "./LoginScene.module.css"
 
 import Checkbox from "@mui/material/Checkbox"
+import { Link } from "react-router-dom"
 
 export default function LoginScene(props) {
-    const navigate = useNavigate()
     const { useLogin } = props
-    const [isLoggedIn, setIsLoggedIn] = useLogin
+    const [isLoggedIn, checkLogin] = useLogin
+    const navigate = useNavigate()
 
-    const [user, setUser] = useState({ login: "", username: "", email: "", password: "", passwordConfirm: "" })
-    const { login, username, email, password, passwordConfirm } = user
-    function updateUser(updateEl) {
-        setUser((prevUser) => ({ ...prevUser, ...updateEl }))
+    const [user, setUser] = useState({
+        idStudiengang: null,
+        vorname: "",
+        nachname: "",
+        email: "",
+        password: "",
+        passwordConfirm: "",
+        checkAgb: false
+    })
+    const { idStudiengang, vorname, nachname, email, password, passwordConfirm, checkAgb } = user
+    function updateUser(updateObj) {
+        setUser((prevUser) => ({ ...prevUser, ...updateObj }))
     }
 
     const [registerChecked, setRegisterChecked] = useState(false)
@@ -22,13 +31,12 @@ export default function LoginScene(props) {
     const [error, setError] = useState()
 
     function tryLogin() {
-        userLogin(login, password)
+        userLogin(email, password)
             .then((data) => {
-                setIsLoggedIn(data.username)
+                checkLogin(false, { idBenutzer: data.idBenutzer })
                 navigate("/")
             })
             .catch((e) => {
-                // console.log("Login failed", e.response)
                 if (e.messages) {
                     setError(e.messages[0])
                 } else {
@@ -38,19 +46,23 @@ export default function LoginScene(props) {
     }
 
     function tryRegister() {
-        userRegister(username, email, password, passwordConfirm)
-            .then((data) => {
-                console.log("REGISTERED")
-                setIsLoggedIn(data.username)
-                navigate("/items")
-            })
-            .catch((e) => {
-                if (e.messages) {
-                    setError(e.messages[0])
-                } else {
-                    setError(e.error)
-                }
-            })
+        if (password === passwordConfirm) {
+            userRegister({ idStudiengang, vorname, nachname, password, email })
+                .then((data) => {
+                    console.log("REGISTERED", data)
+                    checkLogin(false, { idBenutzer: data.idBenutzer })
+                    navigate("/")
+                })
+                .catch((e) => {
+                    if (e.messages) {
+                        setError(e.messages[0])
+                    } else {
+                        setError(e.error)
+                    }
+                })
+        } else {
+            setError("Passwörter stimmen nicht überein")
+        }
     }
 
     function handleEnterPressLogin(e) {
@@ -63,6 +75,16 @@ export default function LoginScene(props) {
         <>
             <div>
                 <TextField
+                    id="email"
+                    label="E-Mail"
+                    variant="outlined"
+                    value={email}
+                    onChange={(e) => updateUser({ email: e.target.value })}
+                    onKeyPress={handleEnterPressLogin}
+                />
+            </div>
+            {/* <div>
+                <TextField
                     id="login"
                     label="Username or E-Mail"
                     variant="outlined"
@@ -70,7 +92,7 @@ export default function LoginScene(props) {
                     onChange={(e) => updateUser({ login: e.target.value })}
                     onKeyPress={handleEnterPressLogin}
                 />
-            </div>
+            </div> */}
             <div>
                 <TextField
                     id="password"
@@ -91,17 +113,27 @@ export default function LoginScene(props) {
     const registerComponents = (
         <>
             <div>
+                <TextField id="email" label="E-Mail" variant="outlined" value={email} onChange={(e) => updateUser({ email: e.target.value })} />
+            </div>
+            <div>
                 <TextField
-                    id="username"
-                    label="Username"
+                    id="vorname"
+                    label="Vorname"
                     variant="outlined"
-                    value={username}
-                    onChange={(e) => updateUser({ username: e.target.value })}
+                    value={vorname}
+                    onChange={(e) => updateUser({ vorname: e.target.value })}
                 />
             </div>
             <div>
-                <TextField id="email" label="E-Mail" variant="outlined" value={email} onChange={(e) => updateUser({ email: e.target.value })} />
+                <TextField
+                    id="nachname"
+                    label="Nachname"
+                    variant="outlined"
+                    value={nachname}
+                    onChange={(e) => updateUser({ nachname: e.target.value })}
+                />
             </div>
+
             <div>
                 <TextField
                     id="password"
@@ -123,9 +155,15 @@ export default function LoginScene(props) {
                 />
             </div>
             <div>
-                <FormGroup>
-                    <FormControlLabel control={<Checkbox />} label="Ich habe die AGBs gelesen" />
-                </FormGroup>
+                <Checkbox
+                    value={checkAgb}
+                    onChange={(e, check) => {
+                        updateUser({ checkAgb: check })
+                    }}
+                />
+                <span>
+                    Ich habe die <Link to="/agb">AGB</Link>s gelesen
+                </span>
             </div>
             <Button variant="contained" onClick={tryRegister}>
                 Register

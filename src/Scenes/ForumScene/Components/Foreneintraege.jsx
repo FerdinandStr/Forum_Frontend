@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react"
 import styles from ".././ForumScene.module.css"
-import GenericFoldingContainer from "../../../components/FoldingContainer/GenericFoldingContainer.jsx"
 import { Link } from "react-router-dom"
-import IconButton from "@mui/material/IconButton"
 import { MdAddCircle } from "react-icons/md"
 import { useNavigate } from "react-router"
 
@@ -10,6 +8,7 @@ import { basePath } from "../../../controller/rest"
 import { getForeneintraegeByForum } from "../../../api/forenRoutes"
 import Pagination, { usePaginationState } from "../../../components/Pagination/Pagination"
 import { countBeitraege } from "../../../api/beitragRoutes"
+import { Button } from "@mui/material"
 
 export default function Foreneintraege({ idForum }) {
     const navigate = useNavigate()
@@ -42,14 +41,9 @@ export default function Foreneintraege({ idForum }) {
             <div className={styles.ContainerHeader}>
                 <h2>{"Diskussionen"} </h2>
                 <Link to={`/foren/${idForum}/addForeneintrag`}>
-                    <IconButton
-                        color="primary"
-                        aria-label="add Unterforum"
-                        component="span"
-                    >
-                        {/* Icons, auch MaterialDesign von https://react-icons.github.io/react-icons/search?q=addcircle */}
-                        <MdAddCircle />
-                    </IconButton>
+                    <Button variant="contained" startIcon={<MdAddCircle />}>
+                        Neuer Foreneintrag
+                    </Button>
                 </Link>
             </div>
             <div className={styles.content}>
@@ -59,8 +53,6 @@ export default function Foreneintraege({ idForum }) {
             </div>
             <Pagination externalPaginationState={paginationState} />
         </div>
-
-
     )
 }
 

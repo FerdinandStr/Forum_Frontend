@@ -3,30 +3,14 @@ import ReactDOM from "react-dom"
 import { BrowserRouter } from "react-router-dom"
 import "./globalStyle.css"
 import MainPage from "./MainPage.jsx"
-import { ThemeProvider, createTheme } from '@mui/material/styles';
-
-//https://bareynol.github.io/mui-theme-creator/
-
-const theme = createTheme({
-    palette: {
-        type: 'light',
-        primary: {
-            main: '#c7173b',
-            light: '#0c14c1',
-        },
-        secondary: {
-            main: '#f50057',
-        },
-        text: {
-            primary: 'rgba(241,235,235,0.87)',
-            secondary: 'r#c7173b',
-        },
-    },
-});
+import { ThemeProvider } from "@mui/material/styles"
+import { theme } from "./muiTheme"
+import CssBaseline from "@mui/material/CssBaseline"
 
 ReactDOM.render(
     <BrowserRouter>
         <ThemeProvider theme={theme}>
+            <CssBaseline />
             <MainPage />
         </ThemeProvider>
     </BrowserRouter>,
