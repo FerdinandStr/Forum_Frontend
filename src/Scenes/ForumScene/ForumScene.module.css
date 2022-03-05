@@ -1,13 +1,3 @@
-.inner{
-    display: block;
-}
-
-.header{
-    position: relative;
-}
-
-.item{
-    display: block;
-    list-style-type: none;
-    margin: 0;
+.ForumHeader {
+    margin: 25px 0;
 }

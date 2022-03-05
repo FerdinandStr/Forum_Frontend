@@ -15,13 +15,13 @@ module.exports = {
     env: {
         browser: true,
         es6: true,
-        jest: true
+        jest: true,
     },
     extends: ["eslint:recommended", "plugin:react/recommended", "plugin:react-hooks/recommended", "plugin:prettier/recommended"],
     settings: {
         react: {
-            version: "detect"
-        }
+            version: "detect",
+        },
     },
     parser: "@babel/eslint-parser",
     rules: {
@@ -32,8 +32,9 @@ module.exports = {
         "prettier/prettier": [
             "warn",
             {
-                endOfLine: "auto"
-            }
-        ]
-    }
+                trailingComma: "es5",
+                endOfLine: "auto",
+            },
+        ],
+    },
 }

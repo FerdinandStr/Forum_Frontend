@@ -19,7 +19,8 @@
     --box-bg-alt2: red;
 
     /* Nur für Box header mit Farbverlauf (oder alles mit farbverlauf) */
-    --box-bg-gradient: linear-gradient(90deg, rgba(227, 0, 27, 1) 0%, rgba(124, 137, 145, 1) 71%, rgba(92, 105, 113, 1) 100%);
+    /* --box-bg-gradient: linear-gradient(90deg, rgba(227, 0, 27, 1) 0%, rgba(124, 137, 145, 1) 71%, rgba(92, 105, 113, 1) 100%); */
+    --box-bg-gradient: linear-gradient(90deg, #e2001a 0%, #d9a91a 100%);
 
     /* globale Textfarbe */
     --text-main-color: #f2f2f2;
@@ -42,6 +43,14 @@ html {
     color: var(--text-main-color);
     font-size: 100%;
     background: var(--bg-main);
+}
+
+h1,
+h2,
+h3,
+h4 {
+    font-family: "Nunito";
+    letter-spacing: 1px;
 }
 
 p {
@@ -81,18 +90,18 @@ a {
     text-decoration: none;
     cursor: pointer;
     color: inherit;
-    color: #d9a91a;
+
     transition: 0.15s ease-in-out;
 }
 a:hover {
-    color: #d9cf1a;
+    color: #d9a91a;
+    /* color: #d9cf1a; */
+    text-decoration: underline;
 }
 
 .defaultPageContainer {
     max-width: 1200px;
-    padding: 20px;
+    padding: 30px;
     margin: auto;
-    display: flex;
-    flex-direction: column;
     background-color: var(--box-bg-main);
 }

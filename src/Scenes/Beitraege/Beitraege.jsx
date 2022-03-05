@@ -52,7 +52,7 @@ export default function Beitraege() {
 
     return (
         <div>
-            <DrillDownPath forumData={idForum} />
+            <DrillDownPath idForum={idForum} />
 
             <h1 className={styles.BeitragHeader}>{foreneintragData ? foreneintragData[0].name : null}</h1>
 

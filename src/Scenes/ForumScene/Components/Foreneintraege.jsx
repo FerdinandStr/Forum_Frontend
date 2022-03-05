@@ -7,7 +7,6 @@ import { useNavigate } from "react-router"
 import { basePath } from "../../../controller/rest"
 import { getForeneintraegeByForum } from "../../../api/forenRoutes"
 import Pagination, { usePaginationState } from "../../../components/Pagination/Pagination"
-import { countBeitraege } from "../../../api/beitragRoutes"
 import { Button } from "@mui/material"
 
 export default function Foreneintraege({ idForum }) {
@@ -21,7 +20,6 @@ export default function Foreneintraege({ idForum }) {
     useEffect(() => {
         getForeneintraegeByForum(idForum, limit, offset)
             .then((data) => {
-                console.log(data)
                 setForeneintraege(data)
             })
             .catch((err) => {
@@ -48,7 +46,7 @@ export default function Foreneintraege({ idForum }) {
             </div>
             <div className={styles.content}>
                 {forneneintraege
-                    ? forneneintraege.map((forneneintrag) => <Foreneintrag forneneintrag={forneneintrag} key={"fe" + forneneintrag.idForeneintrag} />)
+                    ? forneneintraege.map((foreneintrag) => <Foreneintrag foreneintrag={foreneintrag} key={"fe" + foreneintrag.idForeneintrag} />)
                     : null}
             </div>
             <Pagination externalPaginationState={paginationState} />
@@ -56,21 +54,20 @@ export default function Foreneintraege({ idForum }) {
     )
 }
 
-function Foreneintrag({ forneneintrag }) {
+function Foreneintrag({ foreneintrag }) {
+    console.log(foreneintrag)
     return (
         <div className={styles.item}>
             <div className={styles.topic}>
-                <Link to={"/foren/" + forneneintrag.idForum + "/foreneintraege/" + forneneintrag.idForeneintrag}>{forneneintrag.name} </Link>
+                <Link to={"/foren/" + foreneintrag.idForum + "/foreneintraege/" + foreneintrag.idForeneintrag}>{foreneintrag.name} </Link>
             </div>
             <div className={styles.userInfo}>
                 <div>
-                    <div>
-                        <img src={basePath + forneneintrag.ersteller.pfad} alt="NIF" className={styles.userPic} />
-                    </div>
+                    <div>{/* <img src={basePath + foreneintrag.ersteller.pfad} alt="NIF" className={styles.userPic} /> */}</div>
                     <p>Beitrag von </p>
-                    <p title={forneneintrag.idErsteller}>{forneneintrag.erstellerName}</p>
-                    <p title={forneneintrag.studiengangName}>{forneneintrag.studiengangKuerzel}</p>
-                    <p> erstellt am {forneneintrag.createdAt} </p>
+                    <p title={foreneintrag.idErsteller}>{foreneintrag.erstellerName}</p>
+                    <p title={foreneintrag.studiengangName}>{foreneintrag.studiengangKuerzel}</p>
+                    <p> erstellt am {foreneintrag.createdAt} </p>
                 </div>
             </div>
         </div>

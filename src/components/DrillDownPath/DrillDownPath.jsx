@@ -3,9 +3,7 @@ import styles from "./DrillDownPath.module.css"
 import { getParentPath } from "../../api/forenRoutes"
 import { Link } from "react-router-dom"
 
-export default function DrillDownPath(forumData) {
-    const idForum = forumData.forumData
-
+export default function DrillDownPath({ idForum, returnActiveForumName }) {
     const [result, setResult] = useState()
 
     useEffect(() => {
@@ -15,15 +13,16 @@ export default function DrillDownPath(forumData) {
                 let names = data.name_path.split("->")
                 let res_tmp = []
                 ids.forEach((id, i) => res_tmp.push({ id: id, name: names[i] }))
+                returnActiveForumName ? returnActiveForumName(res_tmp[res_tmp.length - 1].name) : null
                 setResult(res_tmp)
             })
             .catch((err) => {
                 console.log("ERR drill down", err)
             })
-    }, [forumData])
+    }, [idForum])
 
     return (
-        <div>
+        <div className={styles.DrillDownDiv}>
             {result
                 ? result.map((item) =>
                       item.id == 1 ? (

@@ -19,7 +19,7 @@ export default function LoginScene(props) {
         email: "",
         password: "",
         passwordConfirm: "",
-        checkAgb: false
+        checkAgb: false,
     })
     const { idStudiengang, vorname, nachname, email, password, passwordConfirm, checkAgb } = user
     function updateUser(updateObj) {
@@ -166,7 +166,7 @@ export default function LoginScene(props) {
                 </span>
             </div>
             <Button variant="contained" onClick={tryRegister}>
-                Register
+                Registrieren
             </Button>
         </>
     )

@@ -7,12 +7,12 @@ function postForen(data) {
 
 //Get
 function getForenById(queryParams) {
-    return getReq("/foren", null, { params: queryParams })
+    return getReq("/foren", queryParams)
 }
 
 //Get
-function getSubforen(idForum) {
-    return getReq("/foren/" + idForum + "/unterforen", null, null)
+function getSubforen(idForum, limit, offset) {
+    return getReq("/foren/" + idForum + "/unterforen", { limit, offset })
 }
 
 function getForeneintraegeByForum(idForum, limit, offset) {
@@ -21,7 +21,11 @@ function getForeneintraegeByForum(idForum, limit, offset) {
 
 //Get
 function getParentPath(idForum) {
-    return getReq("/foren/" + idForum + "/forumParents", null, null)
+    return getReq("/foren/" + idForum + "/forumParents")
+}
+
+function countSubforen(idForum) {
+    return getReq("/foren/" + idForum + "/unterforen/count")
 }
 
 //Delete
@@ -29,4 +33,4 @@ function deleteForenById(idForum) {
     return postReq("/foren/" + idForum, null, { method: "delete" })
 }
 
-export { postForen, getForenById, getSubforen, deleteForenById, getParentPath, getForeneintraegeByForum }
+export { postForen, getForenById, getSubforen, deleteForenById, getParentPath, getForeneintraegeByForum, countSubforen }
