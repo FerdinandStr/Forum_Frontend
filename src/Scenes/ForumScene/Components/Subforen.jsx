@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react"
 import { countSubforen, getSubforen } from "../../../api/forenRoutes"
 import { Link } from "react-router-dom"
 import styles from "./Subforen.module.css"
-import { PaginationBar } from "../../Beitraege/Beitraege.module.css"
 import Pagination, { usePaginationState } from "../../../components/Pagination/Pagination"
 import { Button } from "@mui/material"
 
@@ -27,7 +26,7 @@ export default function Subforum({ idForum }) {
 
     return (
         <div className={styles.ForenArea}>
-            <div className={PaginationBar}>
+            <div className={styles.PaginationBar}>
                 <Button variant="contained">Neues Unterforum</Button>
                 {forenCount ? <Pagination externalPaginationState={paginationState} /> : null}
             </div>
