@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import styles from ".././ForumScene.module.css"
+import styles from "./Foreneintraege.module.css"
 import { Link } from "react-router-dom"
 import { MdAddCircle } from "react-icons/md"
 import { useNavigate } from "react-router"
@@ -34,22 +34,28 @@ export default function Foreneintraege({ idForum }) {
     }
 
     return (
-        <div>
-            <Pagination externalPaginationState={paginationState} />
-            <div className={styles.ContainerHeader}>
-                <h2>{"Diskussionen"} </h2>
+        <div className={styles.EintreageArea}>
+            <div className={styles.EintreagePaginationBar}>
                 <Link to={`/foren/${idForum}/addForeneintrag`}>
                     <Button variant="contained" startIcon={<MdAddCircle />}>
                         Neuer Foreneintrag
                     </Button>
                 </Link>
+                <Pagination externalPaginationState={paginationState} />
             </div>
-            <div className={styles.content}>
-                {forneneintraege
-                    ? forneneintraege.map((foreneintrag) => <Foreneintrag foreneintrag={foreneintrag} key={"fe" + foreneintrag.idForeneintrag} />)
-                    : null}
+
+
+            <div className={styles.EintreageContainer}>
+                <div className={styles.EintreageHeaderDiv}>
+                    <p>Diskussionen</p>
+                </div>
+
+                <div className={styles.EintreageList}>
+                    {forneneintraege
+                        ? forneneintraege.map((foreneintrag) => <Foreneintrag foreneintrag={foreneintrag} key={"fe" + foreneintrag.idForeneintrag} />)
+                        : null}
+                </div>
             </div>
-            <Pagination externalPaginationState={paginationState} />
         </div>
     )
 }
@@ -57,7 +63,7 @@ export default function Foreneintraege({ idForum }) {
 function Foreneintrag({ foreneintrag }) {
     console.log(foreneintrag)
     return (
-        <div className={styles.item}>
+        <div className={styles.EintreageEntryDiv}>
             <div className={styles.topic}>
                 <Link to={"/foren/" + foreneintrag.idForum + "/foreneintraege/" + foreneintrag.idForeneintrag}>{foreneintrag.name} </Link>
             </div>

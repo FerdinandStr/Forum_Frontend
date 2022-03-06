@@ -1,0 +1,38 @@
+.EintreageArea {
+    margin-bottom: 25px;
+}
+
+.EintreageContainer {
+    background: var(--box-bg-alt);
+}
+
+.EintreagePaginationContainer {
+    display: flex;
+    justify-content: space-between;
+    margin: 25px 0;
+}
+
+.EintreageHeaderDiv > p {
+    /* background: var(--box-bg-main); */
+    background: var(--box-bg-gradient);
+    font-family: "Nunito";
+    font-size: 1.3rem;
+    line-height: normal;
+    padding: 5px 15px;
+}
+
+.EintreageList {
+    padding: 5px 10px;
+}
+
+.EintreageEntryDiv {
+    background: var(--box-bg-main);
+    padding: 15px;
+    margin: 5px 0;
+}
+
+.EintreagePaginationBar {
+    display: flex;
+    justify-content: space-between;
+    margin: 25px 0;
+}

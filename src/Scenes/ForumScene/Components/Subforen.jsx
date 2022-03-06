@@ -4,6 +4,7 @@ import { Link } from "react-router-dom"
 import styles from "./Subforen.module.css"
 import Pagination, { usePaginationState } from "../../../components/Pagination/Pagination"
 import { Button } from "@mui/material"
+import { MdAddCircle } from "react-icons/md"
 
 export default function Subforum({ idForum }) {
     const [foren, setForen] = useState()
@@ -27,7 +28,11 @@ export default function Subforum({ idForum }) {
     return (
         <div className={styles.ForenArea}>
             <div className={styles.PaginationBar}>
-                <Button variant="contained">Neues Unterforum</Button>
+                <Link to={`/foren/${idForum}/addForum`}>
+                    <Button variant="contained" startIcon={<MdAddCircle />}>
+                        Neues Unterforum
+                    </Button>
+                </Link>
                 {forenCount ? <Pagination externalPaginationState={paginationState} /> : null}
             </div>
             {forenCount ? (
