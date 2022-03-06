@@ -45,7 +45,6 @@ export default function Foreneintraege({ idForum }) {
                 <Pagination externalPaginationState={paginationState} />
             </div>
 
-
             <div className={styles.EintreageContainer}>
                 <div className={styles.EintreageHeaderDiv}>
                     <p>Diskussionen</p>
@@ -65,7 +64,6 @@ function Foreneintrag({ foreneintrag }) {
     console.log(foreneintrag)
     return (
         <div className={styles.EintreageEntryDiv}>
-
             <div className={styles.ErstellerDiv}>
                 <Ersteller ersteller={foreneintrag.ersteller} />
             </div>
@@ -91,7 +89,7 @@ function Ersteller({ ersteller }) {
     return (
         <div className={styles.ErstellerDiv}>
             <div>
-                <Blockies seed={idErsteller + erstellerName} size={7} scale={7} className={styles.BlockieProfil} />
+                <Blockies seed={idErsteller + erstellerName} size={10} scale={7} className={styles.BlockieProfil} />
             </div>
         </div>
     )
