@@ -8,6 +8,7 @@ import { basePath } from "../../../controller/rest"
 import { getForeneintraegeByForum } from "../../../api/forenRoutes"
 import Pagination, { usePaginationState } from "../../../components/Pagination/Pagination"
 import { Button } from "@mui/material"
+import Blockies from "react-blockies"
 
 export default function Foreneintraege({ idForum }) {
     const navigate = useNavigate()
@@ -64,17 +65,33 @@ function Foreneintrag({ foreneintrag }) {
     console.log(foreneintrag)
     return (
         <div className={styles.EintreageEntryDiv}>
-            <div className={styles.topic}>
-                <Link to={"/foren/" + foreneintrag.idForum + "/foreneintraege/" + foreneintrag.idForeneintrag}>{foreneintrag.name} </Link>
+
+            <div className={styles.ErstellerDiv}>
+                <Ersteller ersteller={foreneintrag.ersteller} />
             </div>
-            <div className={styles.userInfo}>
-                <div>
-                    <div>{/* <img src={basePath + foreneintrag.ersteller.pfad} alt="NIF" className={styles.userPic} /> */}</div>
-                    <p>Beitrag von </p>
-                    <p title={foreneintrag.idErsteller}>{foreneintrag.erstellerName}</p>
-                    <p title={foreneintrag.studiengangName}>{foreneintrag.studiengangKuerzel}</p>
-                    <p> erstellt am {foreneintrag.createdAt} </p>
+            <div className={styles.ForeneintragInfo}>
+                <div className={styles.ForeneintragHeader}>
+                    <Link to={"/foren/" + foreneintrag.idForum + "/foreneintraege/" + foreneintrag.idForeneintrag}>{foreneintrag.name} </Link>
                 </div>
+                <div className={styles.userInfo}>
+                    <div className={styles.ForeneintragInhalt}>
+                        <div>{/* <img src={basePath + foreneintrag.ersteller.pfad} alt="NIF" className={styles.ForeneintragInhalt} /> */}</div>
+                        <div title={foreneintrag.idErsteller}>Erstellt von {foreneintrag.ersteller.erstellerName}</div>
+                        <div> erstellt am {foreneintrag.createdAt} </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
+}
+
+function Ersteller({ ersteller }) {
+    const { idErsteller, erstellerName, studiengangKuerzel, studiengangName } = ersteller
+
+    return (
+        <div className={styles.ErstellerDiv}>
+            <div>
+                <Blockies seed={idErsteller + erstellerName} size={7} scale={7} className={styles.BlockieProfil} />
             </div>
         </div>
     )
