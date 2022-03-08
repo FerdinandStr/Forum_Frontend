@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react"
 import styles from "./Beitraege.module.css"
 import { getBeitraegeForForeneintrag, getForeneintraegeById } from "../../api/foreneintragRoutes"
-import { useParams } from "react-router-dom"
+import { useParams, useSearchParams } from "react-router-dom"
 import Beitrag from "./Beitrag"
 import BeitragCreator from "./MD/BeitragCreator"
 import parseMdToHtml from "../../helper/parseMdToHtml"
@@ -17,10 +17,17 @@ export default function Beitraege() {
     const [foreneintragData, setForeneintragData] = useState()
     const [beitragList, setBeitragList] = useState()
     const [trigger, forceUpdate] = useForceUpdate()
-    //pagination data
     const [beitragCount, setBeitragCount] = useState(0)
-    const paginationState = usePaginationState(beitragCount)
-    const { limit, offset } = paginationState[0]
+
+    //Pagination//
+    //searchParams are updated inside the Pagination Component
+    const [searchParams] = useSearchParams()
+    const page = parseInt(searchParams.get("page"))
+    const limit = parseInt(searchParams.get("limit"))
+    const offset = limit * (page - 1)
+    //to sync the 2 Pagination Components and load startPage and startLimit
+    const paginationState = usePaginationState(beitragCount, page, limit)
+    //---//
 
     useEffect(() => {
         function getData() {
@@ -60,7 +67,7 @@ export default function Beitraege() {
                 <Button variant="contained" onClick={() => myRef.current.scrollIntoView()}>
                     Neuer Beitrag
                 </Button>
-                <Pagination externalPaginationState={paginationState} />
+                <Pagination useURL externalPaginationState={paginationState} />
             </div>
             <div className={styles.BeitraegeContainer}>
                 {beitragList ? (
@@ -72,7 +79,7 @@ export default function Beitraege() {
 
             <div className={styles.PaginationBar}>
                 <div />
-                <Pagination externalPaginationState={paginationState} />
+                <Pagination useURL externalPaginationState={paginationState} />
             </div>
             <div ref={myRef}>
                 <BeitragCreator parseMdToHtml={parseMdToHtml} forceUpdateBeitraege={forceUpdate} idForum={idForum} idForeneintrag={idForeneintrag} />
