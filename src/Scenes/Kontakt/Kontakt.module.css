@@ -1,3 +1,8 @@
+
+.defaultPageContainerKontakt{
+    text-align: center;
+}
+
 .kontaktPageContainer {
     text-align: center;
 }
@@ -15,15 +20,20 @@
     line-height: 1.5em;
 }
 
-.Kontaktsymbole {
-    /* margin-left: 10%;
-    margin-right: 10%; */
+.InfoItemContainer {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+    align-items: center;
+    padding-top: 30px;
+    padding-bottom: 30px;
 }
 
 .IconContainerKontakt {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
 }
 
 .KontaktBlock {
@@ -54,6 +64,8 @@
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-around;
+    padding-top: 30px;
+    padding-bottom: 30px;
 }
 
 .BitmojiContainerKontakt p {
