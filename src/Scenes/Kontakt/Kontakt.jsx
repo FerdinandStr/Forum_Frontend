@@ -8,7 +8,7 @@ export default function Kontakt() {
     return (
         <div>
             <div className={("defaultPageContainer", style.defaultPageContainerKontakt)}>
-                <h1>Wir sind für Sie da</h1>
+                <h1>Kontakt</h1>
 
                 <div className={("defaultPageContainer", style.InfoItemContainer)}>
                     <div className={style.IconContainerKontakt}>
