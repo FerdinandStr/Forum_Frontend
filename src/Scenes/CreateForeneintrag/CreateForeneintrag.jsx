@@ -11,6 +11,9 @@ import { useNavigate } from "react-router"
 
 import InputLabel from "@mui/material/InputLabel"
 import Select from "@mui/material/Select"
+
+import parseMdToHtml from "../../helper/parseMdToHtml"
+import MdEditor from "react-markdown-editor-lite"
 // Achtung !!!! ParentID Muss Numeric sein + Name muss min. 5 Zeichen lang sein
 // TODO !!!!!!
 
@@ -26,6 +29,7 @@ export default function CreateForeneintrag() {
     const [name, setName] = useState()
     const [kategories, setKategories] = useState()
     const [selectedKategorie, setSelectedKategorie] = useState({ id_kategorie: null, name: "" })
+    const [mdText, setMdText] = useState("")
 
     const [initBeitrag, setInitBeitrag] = useState()
 
@@ -48,13 +52,14 @@ export default function CreateForeneintrag() {
             let data_forum = {
                 idForum: paresedId,
                 name: name,
-                idKategorie: selectedKategorie.id_kategorie
+                idKategorie: selectedKategorie.id_kategorie,
+                beitragInhalt: mdText,
             }
             postForeneintraege(data_forum).then((res) => {
                 let data_beitrag = {
                     idForum: paresedId,
                     idForeneintrag: res.idForeneintrag,
-                    inhalt: initBeitrag
+                    inhalt: initBeitrag,
                 }
                 postBeitraege(data_beitrag).then((data) => {
                     navigate("/foren/" + idForum + "/foreneintraege/" + data.idBeitrag)
@@ -71,36 +76,55 @@ export default function CreateForeneintrag() {
     }, [idForum])
 
     return (
-        <div>
-            <div> Foreneintrag erstellen</div>
+        <div className={styles.CFContainer}>
+            <div className={styles.CFElement}> Foreneintrag erstellen</div>
+            <div className={styles.CFElement}>
+                <TextField id="outlined-disabled" label="Name" onChange={handleChangeName} />
+            </div>
+            <div className={styles.ElementCF}>
+                <InputLabel id="demo-simple-select-label">Kategorie</InputLabel>
+            </div>
+            <div className={styles.CFElement}>
+                <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={selectedKategorie}
+                    label="Age"
+                    onChange={handleChangeSelectedKategorie}
+                >
+                    {kategories
+                        ? kategories.map((kat) => {
+                            return (
+                                <MenuItem key={kat.idKategorie} value={kat}>
+                                    {kat.name}
+                                </MenuItem>
+                            )
+                        })
+                        : null}
+                </Select>
+            </div>
+            <div className={styles.CFElement}>
+                <TextField id="outlined-disabled" label="Beschreibung" onChange={handleChangeinitBeitrag} />
+            </div>
 
-            <TextField id="outlined-disabled" label="Name" onChange={handleChangeName} />
+            <div className="forum-md-editor">
+                <MdEditor
+                    id={"MdEditor"}
+                    style={{ minHeight: "300px" }}
+                    value={mdText}
+                    renderHTML={(text) => parseMdToHtml(text)}
+                    onChange={(e) => setMdText(e.text)}
+                />
+            </div>
 
-            <InputLabel id="demo-simple-select-label">Kategorie</InputLabel>
-            <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value={selectedKategorie}
-                label="Age"
-                onChange={handleChangeSelectedKategorie}
-            >
-                {kategories
-                    ? kategories.map((kat) => {
-                          return (
-                              <MenuItem key={kat.idKategorie} value={kat}>
-                                  {kat.name}
-                              </MenuItem>
-                          )
-                      })
-                    : null}
-            </Select>
-
-            <TextField id="outlined-disabled" label="Beschreibung" onChange={handleChangeinitBeitrag} />
-
-            <Button variant="contained" onClick={createForeneintrag}>
-                Erstellen
-            </Button>
-            <Button variant="outlined">Abbrechen</Button>
+            <div className={styles.defaultPageContainerButtons}>
+                <Button variant="contained" onClick={createForeneintrag}>
+                    Erstellen
+                </Button>
+                <Link to={`/foren/${idForum}`}>
+                    <Button variant="outlined">Abbrechen</Button>
+                </Link>
+            </div>
         </div>
     )
 }

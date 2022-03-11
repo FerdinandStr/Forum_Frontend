@@ -4,11 +4,9 @@ import { Link } from "react-router-dom"
 import { MdAddCircle } from "react-icons/md"
 import { useNavigate } from "react-router"
 
-import { basePath } from "../../../controller/rest"
 import { countForeneintraegeInForum, getForeneintraegeInForum } from "../../../api/forenRoutes"
 import Pagination, { usePaginationState } from "../../../components/Pagination/Pagination"
 import { Button } from "@mui/material"
-import Blockies from "react-blockies"
 
 import { RiDiscussLine } from "react-icons/ri"
 import { AiOutlineClockCircle } from "react-icons/ai"

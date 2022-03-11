@@ -5,6 +5,7 @@ import { useParams, Link } from "react-router-dom"
 import Button from "@mui/material/Button"
 import TextField from "@mui/material/TextField"
 import { useNavigate } from "react-router"
+
 // Achtung !!!! ParentID Muss Numeric sein + Name muss min. 3 Zeichen lang sein
 // TODO !!!!!!
 
@@ -23,7 +24,7 @@ export default function CreateUnterforum() {
 
         let data = {
             name: name,
-            idParentForum: paresedId
+            idParentForum: paresedId,
         }
         postForen(data).then((data) => {
             navigate("/foren/" + data.idForum)
@@ -31,12 +32,20 @@ export default function CreateUnterforum() {
     }
 
     return (
-        <div>
-            <div> Forum erstellen</div> <TextField id="outlined-disabled" label="Name" onChange={handleChangeName} />
-            <Button variant="contained" onClick={createForum}>
-                Erstellen
-            </Button>
-            <Button variant="outlined">Abbrechen</Button>
+        <div className={styles.CUContainer}>
+            <div className={styles.CUElement}> Forum erstellen</div>
+            <div className={styles.CUElement}>
+                <TextField id="outlined-disabled" label="Name" onChange={handleChangeName} />
+            </div>
+
+            <div className={styles.defaultCUButtons}>
+                <Button variant="contained" onClick={createForum}>
+                    Erstellen
+                </Button>
+                <Link to={`/foren/${idForum}`}>
+                    <Button variant="outlined">Abbrechen</Button>
+                </Link>
+            </div>
         </div>
     )
 }
