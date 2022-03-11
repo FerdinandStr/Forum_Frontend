@@ -5,7 +5,7 @@ import { MdAddCircle } from "react-icons/md"
 import { useNavigate } from "react-router"
 
 import { basePath } from "../../../controller/rest"
-import { getForeneintraegeByForum } from "../../../api/forenRoutes"
+import { countForeneintraegeInForum, getForeneintraegeInForum } from "../../../api/forenRoutes"
 import Pagination, { usePaginationState } from "../../../components/Pagination/Pagination"
 import { Button } from "@mui/material"
 import Blockies from "react-blockies"
@@ -13,13 +13,17 @@ import Blockies from "react-blockies"
 export default function Foreneintraege({ idForum }) {
     const navigate = useNavigate()
 
-    const [beitragCount, setBeitragCount] = useState(0)
-    const paginationState = usePaginationState(beitragCount)
+    const [forneneintraegeCount, setForneneintraegeCount] = useState(0)
+    const paginationState = usePaginationState(forneneintraegeCount)
     const { limit, offset } = paginationState[0]
 
     const [forneneintraege, setForeneintraege] = useState()
     useEffect(() => {
-        getForeneintraegeByForum(idForum, limit, offset)
+        countForeneintraegeInForum(idForum).then((count) => {
+            setForneneintraegeCount(count)
+        })
+
+        getForeneintraegeInForum(idForum, limit, offset)
             .then((data) => {
                 setForeneintraege(data)
             })
@@ -42,7 +46,7 @@ export default function Foreneintraege({ idForum }) {
                         Neuer Foreneintrag
                     </Button>
                 </Link>
-                <Pagination externalPaginationState={paginationState} />
+                {forneneintraegeCount > limit ? <Pagination externalPaginationState={paginationState} /> : null}
             </div>
 
             <div className={styles.EintreageContainer}>
@@ -61,12 +65,10 @@ export default function Foreneintraege({ idForum }) {
 }
 
 function Foreneintrag({ foreneintrag }) {
-    console.log(foreneintrag)
+    console.log("UPDATED ENDPOINT!!!", foreneintrag)
     return (
         <div className={styles.EintreageEntryDiv}>
-            <div className={styles.ErstellerDiv}>
-                <Ersteller ersteller={foreneintrag.ersteller} />
-            </div>
+            <div className={styles.ErstellerDiv}>{/* <Ersteller ersteller={foreneintrag.ersteller} /> */}</div>
             <div className={styles.ForeneintragInfo}>
                 <div className={styles.ForeneintragHeader}>
                     <Link to={"/foren/" + foreneintrag.idForum + "/foreneintraege/" + foreneintrag.idForeneintrag}>{foreneintrag.name} </Link>
@@ -74,7 +76,7 @@ function Foreneintrag({ foreneintrag }) {
                 <div className={styles.userInfo}>
                     <div className={styles.ForeneintragInhalt}>
                         <div>{/* <img src={basePath + foreneintrag.ersteller.pfad} alt="NIF" className={styles.ForeneintragInhalt} /> */}</div>
-                        <div title={foreneintrag.idErsteller}>Erstellt von {foreneintrag.ersteller.erstellerName}</div>
+                        {/* <div title={foreneintrag.idErsteller}>Erstellt von {foreneintrag.ersteller.erstellerName}</div> */}
                         <div> erstellt am {foreneintrag.createdAt} </div>
                     </div>
                 </div>

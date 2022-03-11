@@ -33,7 +33,7 @@ export default function Subforum({ idForum }) {
                         Neues Unterforum
                     </Button>
                 </Link>
-                {forenCount ? <Pagination externalPaginationState={paginationState} /> : null}
+                {forenCount > limit ? <Pagination externalPaginationState={paginationState} /> : null}
             </div>
             {forenCount ? (
                 <div className={styles.SubforenContainer}>

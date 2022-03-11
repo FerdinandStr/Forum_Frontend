@@ -3,13 +3,13 @@ import styles from "./Beitrag.module.css"
 import { MdOutlineWatchLater } from "react-icons/md"
 import Blockies from "react-blockies"
 
-export default function Beitrag({ beitragData, parseMdToHtml, i }) {
+export default function Beitrag({ beitragNumber, beitragData, parseMdToHtml }) {
     const { idBeitrag, inhalt, createdAt, ersteller } = beitragData
 
     return (
         <div className={styles.BeitragDiv}>
             <div>
-                <Ersteller ersteller={ersteller} i={i} />
+                <Ersteller ersteller={ersteller} />
             </div>
             <div className={styles.BeitragContentArea}>
                 <div className={styles.BeitragHeader}>
@@ -21,10 +21,10 @@ export default function Beitrag({ beitragData, parseMdToHtml, i }) {
                             month: "numeric",
                             day: "numeric",
                             hour: "numeric",
-                            minute: "numeric"
+                            minute: "numeric",
                         })}
                     </div>
-                    <div>{"# " + idBeitrag}</div>
+                    <div>{"# " + beitragNumber}</div>
                 </div>
                 <div className={styles.BeitragInhalt} dangerouslySetInnerHTML={{ __html: parseMdToHtml(inhalt) }} />
                 <div></div>

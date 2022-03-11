@@ -40,6 +40,7 @@ export default function Beitraege() {
                 .catch((err) => {
                     console.log("ERRROR", err)
                     setBeitragList()
+                    setBeitragCount(0)
                 })
         }
 
@@ -71,7 +72,10 @@ export default function Beitraege() {
             </div>
             <div className={styles.BeitraegeContainer}>
                 {beitragList ? (
-                    beitragList.map((beitrag) => <Beitrag key={beitrag.idBeitrag} parseMdToHtml={parseMdToHtml} beitragData={beitrag} />)
+                    beitragList.map((beitrag, i) => {
+                        const beitragNumber = i + offset + 1
+                        return <Beitrag key={beitrag.idBeitrag} beitragNumber={beitragNumber} parseMdToHtml={parseMdToHtml} beitragData={beitrag} />
+                    })
                 ) : (
                     <div>Fehler, keine Beiträge</div>
                 )}
