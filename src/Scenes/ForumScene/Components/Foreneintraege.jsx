@@ -2,23 +2,23 @@ import React, { useEffect, useState } from "react"
 import styles from "./Foreneintraege.module.css"
 import { Link } from "react-router-dom"
 import { MdAddCircle } from "react-icons/md"
-import { useNavigate } from "react-router"
 
 import { countForeneintraegeInForum, getForeneintraegeInForum } from "../../../api/forenRoutes"
 import Pagination, { usePaginationState } from "../../../components/Pagination/Pagination"
 import { Button } from "@mui/material"
 
 import { RiDiscussLine } from "react-icons/ri"
-import { AiOutlineClockCircle } from "react-icons/ai"
+import { AiOutlineClockCircle, AiOutlineTag } from "react-icons/ai"
 
 import Blockies from "react-blockies"
+import { getKategorie } from "../../../api/kategorieRoutes"
 
 export default function Foreneintraege({ idForum }) {
-    const navigate = useNavigate()
-
     const [forneneintraegeCount, setForneneintraegeCount] = useState(0)
     const paginationState = usePaginationState(forneneintraegeCount)
     const { limit, offset } = paginationState[0]
+
+    const [kategorieList, setKategorieList] = useState()
 
     const [forneneintraege, setForeneintraege] = useState()
     useEffect(() => {
@@ -36,10 +36,13 @@ export default function Foreneintraege({ idForum }) {
             })
     }, [idForum, limit, offset])
 
-    //onClick={changeToAddForenEintrag()}
-    const changeToAddForenEintrag = (e) => {
-        navigate("/foren/" + idForum + "/addForeneintrag")
-    }
+    useEffect(() => {
+        getKategorie().then((data) => {
+            setKategorieList(data)
+        })
+    }, [idForum])
+
+    console.log("LIST", kategorieList)
 
     return (
         <div className={styles.EintreageArea}>
@@ -55,6 +58,7 @@ export default function Foreneintraege({ idForum }) {
             <div className={styles.EintreageContainer}>
                 <div className={styles.EintreageHeaderDiv}>
                     <div className={styles.HeaderForeneintrag}>{"Foreneinträge"}</div>
+                    <AiOutlineTag className={styles.HeaderKategorie} size={20} />
                     <RiDiscussLine className={styles.HeaderCount} size={20} />
                     <AiOutlineClockCircle className={styles.HeaderLetzterBeitrag} size={20} />
                 </div>
@@ -70,16 +74,20 @@ export default function Foreneintraege({ idForum }) {
 }
 
 function Foreneintrag({ foreneintrag }) {
+    const { idForum, idForeneintrag, name, countBeitrag, kategorieName } = foreneintrag
     const { ersteller, createdAt } = foreneintrag.lastBeitrag
+    console.log(kategorieName)
     return (
         <div className={styles.ForeneintragDiv}>
             <div className={styles.ForeneintragLink}>
-                <Link to={"/foren/" + foreneintrag.idForum + "/foreneintraege/" + foreneintrag.idForeneintrag}>
-                    <h3>{foreneintrag.name}</h3>
+                <Link to={"/foren/" + idForum + "/foreneintraege/" + idForeneintrag}>
+                    <h3>{name}</h3>
                 </Link>
             </div>
 
-            <p className={styles.BeitraegeCount}> {foreneintrag.countBeitrag}</p>
+            <p className={styles.KategorieName}>{kategorieName}</p>
+
+            <p className={styles.BeitraegeCount}> {countBeitrag}</p>
 
             <div className={styles.LetzterBeitragDiv}>
                 <ErstellerProfil ersteller={ersteller} />

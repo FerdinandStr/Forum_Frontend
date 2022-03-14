@@ -26,8 +26,7 @@ function Header(props) {
                 </Link>
             </div>
             {loginUser ? (
-                <div>
-                    <span>{loginUser.idBenutzer}</span>
+                <div className={styles.LoginButton}>
                     <Button variant="contained" onClick={logout}>
                         Logout
                     </Button>

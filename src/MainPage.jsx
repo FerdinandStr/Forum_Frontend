@@ -16,22 +16,22 @@ import Particles from "react-tsparticles"
 function MainPage() {
     const useLogin = useLoginStatus()
 
-    const particlesInit = (main) => {
-        console.log("INIT", main)
+    // const particlesInit = (main) => {
+    //     console.log("INIT", main)
 
-        // you can initialize the tsParticles instance (main) here, adding custom shapes or presets
-    }
+    //     // you can initialize the tsParticles instance (main) here, adding custom shapes or presets
+    // }
 
-    const particlesLoaded = (container) => {
-        console.log("LOADED", container)
-    }
+    // const particlesLoaded = (container) => {
+    //     console.log("LOADED", container)
+    // }
 
     return (
         <div>
             <Particles
                 id="tsparticles"
-                init={particlesInit}
-                loaded={particlesLoaded}
+                // init={particlesInit}
+                // loaded={particlesLoaded}
                 options={{
                     background: {
                         color: {

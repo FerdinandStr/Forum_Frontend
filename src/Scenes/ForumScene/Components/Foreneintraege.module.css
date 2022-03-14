@@ -28,11 +28,12 @@
 .HeaderForeneintrag {
     margin-right: auto;
 }
-
-.HeaderCount {
-    margin: 0 80px;
+.HeaderKategorie {
+    margin: 0 70px;
 }
-
+.HeaderCount {
+    margin: 0 15px;
+}
 .HeaderLetzterBeitrag {
     margin: 0 160px;
 }
@@ -73,19 +74,25 @@
     color: var(--text-main-color);
 }
 
-.BeitraegeCount {
+.KategorieName {
     margin: 0 50px;
+}
+
+.BeitraegeCount {
+    margin: 0 30px;
 }
 .BlockieProfil {
     margin-right: 15px;
+    border-radius: 4px;
 }
 
 .LetzterBeitragDiv {
     display: flex;
-    margin: 0 50px;
+    margin: 0 40px;
 }
 
-.LetzterBeitragInfo {
+.LetzterBeitragInfo p {
+    font-size: 0.9rem;
 }
 
 .ErstellerName {
