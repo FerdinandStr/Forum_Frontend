@@ -6,7 +6,6 @@
 
 .forum-md-editor {
     margin: 25px 0;
-    text-align: center;
 }
 
 .forum-md-editor > button {
@@ -20,7 +19,14 @@
     background: var(--box-bg-main);
     border-color: var(--box-bg-alt);
     color: var(--text-main-color);
+    /* border: solid 1px red; */
+    /* border-right: solid red 1px; */
 }
+
+.forum-md-editor .rc-md-editor .editor-container .sec-md .section-container {
+    border-right: solid var(--box-bg-alt) 1px;
+}
+
 .forum-md-editor .rc-md-editor .rc-md-navigation {
     background: var(--box-bg-alt);
     border-color: var(--box-bg-alt);

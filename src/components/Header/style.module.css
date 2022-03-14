@@ -1,12 +1,18 @@
 .HeaderDiv {
     display: flex;
-    background: var(--box-bg-alt);
-    padding: 10px;
-    margin-bottom: 25px;
-    
+    background: var(--box-bg-main);
+
     justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto 25px;
 }
 
 .Logo {
-    width: 150px;
+    width: 250px;
+    margin: 15px 30px;
+}
+
+.LoginButton {
+    margin: 30px;
 }

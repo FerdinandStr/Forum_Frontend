@@ -12,31 +12,33 @@
     margin: 25px 0;
 }
 
-.EintreageHeaderDiv > p {
-    /* background: var(--box-bg-main); */
+.EintreageHeaderDiv {
     background: var(--box-bg-gradient);
+    padding: 10px 15px;
+
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
     font-family: "Nunito";
     font-size: 1.3rem;
-    line-height: normal;
-    padding: 5px 15px;
+    text-shadow: 0px 1px 4px #555;
+}
+
+.HeaderForeneintrag {
+    margin-right: auto;
+}
+
+.HeaderCount {
+    margin: 0 80px;
+}
+
+.HeaderLetzterBeitrag {
+    margin: 0 160px;
 }
 
 .EintreageList {
     padding: 5px 10px;
-}
-
-.EintreageEntryDiv {
-    background: var(--box-bg-main);
-    padding: 15px;
-    margin: 5px 0;
-    display: flex;
-    flex-direction: row;
-}
-.pEintreageEntryDiv{
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    flex-direction: row;
 }
 
 .EintreagePaginationBar {
@@ -45,37 +47,51 @@
     margin: 25px 0;
 }
 
-
-.ForeneintragHeader {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 2px;
-    margin-bottom: 5px;
-    padding-bottom: 5px;
-    font-size: 1.5rem;
-    color: var(--text-alt-color);
-    margin-top: 2px;
-    margin-bottom: 5px;
-    padding-bottom: 5px;
-    font-size: 1.5rem;
-}
-
-.ForeneintragInhalt {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    margin-top: 2px;
-    margin-bottom: 2px;
-    padding-bottom: 2px;
-    font-size: 0.8rem;
-    color: var(--text-alt-color);
-}
-
-.ForeneintragInfo{
+.ForeneintragInfo {
     margin-left: 10px;
-    padding-left: 10px;  
+    padding-left: 10px;
     display: flex;
     justify-content: space-between;
     flex-direction: row;
     align-items: center;
+}
+
+.ForeneintragDiv {
+    background: var(--box-bg-main);
+    padding: 15px;
+    margin: 5px 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.ForeneintragLink {
+    margin: 0 auto 0 20px;
+}
+.ForeneintragLink h3 {
+    color: var(--text-main-color);
+}
+
+.BeitraegeCount {
+    margin: 0 50px;
+}
+.BlockieProfil {
+    margin-right: 15px;
+}
+
+.LetzterBeitragDiv {
+    display: flex;
+    margin: 0 50px;
+}
+
+.LetzterBeitragInfo {
+}
+
+.ErstellerName {
+    color: var(--text-main-color);
+}
+
+.ButtonStyle {
+    margin: 5px;
 }

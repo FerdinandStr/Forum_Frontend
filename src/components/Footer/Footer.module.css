@@ -1,9 +1,11 @@
+.footerDiv {
+    padding-top: 30px;
+    max-width: 1200px;
+    margin: auto;
+}
+
 .bottomFooterBar {
     text-align: center;
     padding: 25px;
-}
-
-.footerDiv {
-    padding-top: 15px;
-    background: var(--box-bg-alt);
+    background: var(--box-bg-gradient);
 }

@@ -8,6 +8,7 @@ export const theme = createTheme({
             styleOverrides: {
                 root: {
                     borderRadius: "2px",
+                    textShadow: "0px 1px 4px #555",
                 },
             },
         },
@@ -40,7 +41,8 @@ export const theme = createTheme({
             paper: "var(--box-bg-main)",
         },
         text: {
-            primary: "#f2f2f2", //SET MANUAL!!!
+            primary: "#fff",
+            secondary: "#fffa",
         },
 
         shape: {

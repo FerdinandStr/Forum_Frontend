@@ -22,7 +22,7 @@ function Header(props) {
         <div className={styles.HeaderDiv}>
             <div>
                 <Link to={"/foren/"}>
-                    <img className={styles.Logo} src="/img/StudiForum_V1_transparent.svg" />
+                    <img className={styles.Logo} src="/img/StudiForum_V2_transparent.svg" />
                 </Link>
             </div>
             {loginUser ? (
@@ -33,9 +33,11 @@ function Header(props) {
                     </Button>
                 </div>
             ) : (
-                <Link to="/login">
-                    <Button variant="contained">Login</Button>
-                </Link>
+                <div className={styles.LoginButton}>
+                    <Link to="/login">
+                        <Button variant="contained">Login</Button>
+                    </Link>
+                </div>
             )}
         </div>
     )

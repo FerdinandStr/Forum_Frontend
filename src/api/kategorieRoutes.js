@@ -7,12 +7,12 @@ function postKategorie(data) {
 
 //Get
 function getKategorie(queryParams) {
-    return getReq("/kategorien", null, { params: queryParams })
+    return getReq("/kategorien", queryParams)
 }
 
 //Delete
 function deleteKategorie(katId) {
-    return postReq("/kategorien/" + katnId, null, { method: "delete" })
+    return postReq("/kategorien/" + katId, null, { method: "delete" })
 }
 
 export { postKategorie, getKategorie, deleteKategorie }

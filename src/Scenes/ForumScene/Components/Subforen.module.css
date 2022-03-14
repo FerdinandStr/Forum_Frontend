@@ -1,5 +1,5 @@
 .ForenArea {
-    margin-bottom: 25px;
+    margin-bottom: 50px;
 }
 
 .SubforenContainer {
@@ -12,13 +12,14 @@
     margin: 25px 0;
 }
 
-.HeaderDiv > p {
-    /* background: var(--box-bg-main); */
+.HeaderDiv {
     background: var(--box-bg-gradient);
+    padding: 10px 15px;
+
+    color: var(--text-main-color);
     font-family: "Nunito";
     font-size: 1.3rem;
-    line-height: normal;
-    padding: 5px 15px;
+    text-shadow: 0px 1px 4px #555;
 }
 
 .SubforenList {
@@ -29,6 +30,10 @@
     background: var(--box-bg-main);
     padding: 15px;
     margin: 5px 0;
+}
+.ForumEntryDiv h3 {
+    margin: 0 auto 0 20px;
+    color: var(--text-main-color);
 }
 
 .PaginationBar {

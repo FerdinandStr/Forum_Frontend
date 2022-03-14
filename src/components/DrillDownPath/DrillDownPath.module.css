@@ -1,2 +1,4 @@
 .DrillDownDiv {
+    display: flex;
+    align-items: center;
 }

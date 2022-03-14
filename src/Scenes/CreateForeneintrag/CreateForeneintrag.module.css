@@ -1,19 +1,26 @@
-
-.CFContainer{
+.CFContainer {
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-}   
+}
 
-.defaultPageContainerButtons{
+.defaultPageContainerButtons {
     display: flex;
     align-items: center;
     flex-direction: row;
-    padding-left:20px;
+    padding-left: 20px;
 }
 
-.CFElement{
+.CFElement {
     padding-top: 5px;
     padding-bottom: 5px;
+}
+
+.Textfield {
+    width: 400px;
+}
+
+.ButtonStyle {
+    margin: 5px;
 }

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react"
 import styles from "./DrillDownPath.module.css"
 import { getParentPath } from "../../api/forenRoutes"
 import { Link } from "react-router-dom"
+import { MdKeyboardArrowLeft } from "react-icons/md"
 
 export default function DrillDownPath({ idForum, returnActiveForumName }) {
     const [result, setResult] = useState()
@@ -22,7 +23,7 @@ export default function DrillDownPath({ idForum, returnActiveForumName }) {
     }, [idForum])
 
     return (
-        <div className={styles.DrillDownDiv}>
+        <p className={styles.DrillDownDiv}>
             {result
                 ? result.map((item) =>
                       item.id == 1 ? (
@@ -30,12 +31,15 @@ export default function DrillDownPath({ idForum, returnActiveForumName }) {
                               {item.name}
                           </Link>
                       ) : (
-                          <Link key={item.id} to={"/foren/" + item.id}>
-                              {" -> " + item.name}
-                          </Link>
+                          <>
+                              <MdKeyboardArrowLeft />
+                              <Link key={item.id} to={"/foren/" + item.id}>
+                                  {item.name}
+                              </Link>
+                          </>
                       )
                   )
                 : null}
-        </div>
+        </p>
     )
 }

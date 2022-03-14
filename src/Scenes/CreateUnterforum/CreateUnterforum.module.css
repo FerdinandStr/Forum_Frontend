@@ -1,18 +1,22 @@
-.CUContainer{
+.CUContainer {
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-}   
+}
 
-.defaultCUButtons{
+.defaultCUButtons {
     display: flex;
     align-items: center;
     flex-direction: row;
-    margin-right:5px
+    margin-right: 5px;
 }
 
-.CUElement{
+.CUElement {
     padding-top: 5px;
     padding-bottom: 5px;
+}
+
+.ButtonStyle {
+    margin: 5px;
 }

@@ -3,6 +3,7 @@ import styles from "./CreateForeneintrag.module.css"
 import { postForeneintraege } from "../../api/foreneintragRoutes"
 import { getKategorie } from "../../api/kategorieRoutes"
 import { postBeitraege } from "../../api/beitragRoutes"
+import { getForenById } from "../../api/forenRoutes"
 import { useParams, Link } from "react-router-dom"
 import Button from "@mui/material/Button"
 import TextField from "@mui/material/TextField"
@@ -24,62 +25,64 @@ export default function CreateForeneintrag() {
     const navigate = useNavigate()
     /*-------------------------Weiter zum Komentarbereich----------------------------- */
 
-    let { idForum } = useParams()
+    const { idForum } = useParams()
 
     const [name, setName] = useState()
-    const [kategories, setKategories] = useState()
-    const [selectedKategorie, setSelectedKategorie] = useState({ id_kategorie: null, name: "" })
+    const [kategories, setKategories] = useState([{ idKategorie: 0, name: "Keine Kategorie" }])
+    const [selectedKategorie, setSelectedKategorie] = useState(0)
     const [mdText, setMdText] = useState("")
-
-    const [initBeitrag, setInitBeitrag] = useState()
+    const [parentforumInfo, setParentforumInfo] = useState()
 
     const handleChangeName = (e) => {
         setName(e.target.value)
     }
 
-    const handleChangeinitBeitrag = (e) => {
-        setInitBeitrag(e.target.value)
-    }
-
     const handleChangeSelectedKategorie = async (e) => {
-        console.log(e.target.value)
         setSelectedKategorie(e.target.value)
     }
 
-    const createForeneintrag = (e) => {
+    const createForeneintrag = () => {
         let paresedId = parseInt(idForum)
-        if (!isNaN(paresedId) || name || initBeitrag) {
-            let data_forum = {
+        if (!isNaN(paresedId) || name || mdText) {
+            const kat = selectedKategorie == 0 ? null : selectedKategorie
+
+            const data_forum = {
                 idForum: paresedId,
                 name: name,
-                idKategorie: selectedKategorie.id_kategorie,
+                idKategorie: kat,
                 beitragInhalt: mdText,
             }
-            postForeneintraege(data_forum).then((res) => {
-                let data_beitrag = {
-                    idForum: paresedId,
-                    idForeneintrag: res.idForeneintrag,
-                    inhalt: initBeitrag,
-                }
-                postBeitraege(data_beitrag).then((data) => {
-                    navigate("/foren/" + idForum + "/foreneintraege/" + data.idBeitrag)
+            postForeneintraege(data_forum)
+                .then((res) => {
+                    console.log("RESULT", res.idForeneintrag)
+                    navigate("/foren/" + idForum + "/foreneintraege/" + res.idForeneintrag)
                 })
-            })
+                .catch((e) => {
+                    console.log("ERROR", e)
+                })
         }
     }
 
     useEffect(() => {
-        getKategorie([]).then((data) => {
+        getKategorie().then((data) => {
+            setKategories([...kategories, ...data])
+        })
+
+        getForenById({ idForum: idForum }).then((data) => {
             console.log(data)
-            setKategories(data)
+            console.log(data[0])
+            setParentforumInfo(data[0].name)
         })
     }, [idForum])
 
     return (
         <div className={styles.CFContainer}>
-            <div className={styles.CFElement}> Foreneintrag erstellen</div>
+            <div className={styles.CUElement}>
+                <h1>Foreneintrag in {parentforumInfo}</h1>
+            </div>
+            <p className={styles.CFElement}> Foreneintrag erstellen</p>
             <div className={styles.CFElement}>
-                <TextField id="outlined-disabled" label="Name" onChange={handleChangeName} />
+                <TextField id="outlined-disabled" label="Name" className={styles.Textfield} onChange={handleChangeName} />
             </div>
             <div className={styles.ElementCF}>
                 <InputLabel id="demo-simple-select-label">Kategorie</InputLabel>
@@ -91,20 +94,18 @@ export default function CreateForeneintrag() {
                     value={selectedKategorie}
                     label="Age"
                     onChange={handleChangeSelectedKategorie}
+                    className={styles.Textfield}
                 >
                     {kategories
                         ? kategories.map((kat) => {
-                            return (
-                                <MenuItem key={kat.idKategorie} value={kat}>
-                                    {kat.name}
-                                </MenuItem>
-                            )
-                        })
+                              return (
+                                  <MenuItem key={kat.idKategorie} value={kat.idKategorie}>
+                                      {kat.name}
+                                  </MenuItem>
+                              )
+                          })
                         : null}
                 </Select>
-            </div>
-            <div className={styles.CFElement}>
-                <TextField id="outlined-disabled" label="Beschreibung" onChange={handleChangeinitBeitrag} />
             </div>
 
             <div className="forum-md-editor">
@@ -118,12 +119,16 @@ export default function CreateForeneintrag() {
             </div>
 
             <div className={styles.defaultPageContainerButtons}>
-                <Button variant="contained" onClick={createForeneintrag}>
-                    Erstellen
-                </Button>
-                <Link to={`/foren/${idForum}`}>
-                    <Button variant="outlined">Abbrechen</Button>
-                </Link>
+                <div className={styles.ButtonStyle}>
+                    <Button variant="contained" onClick={createForeneintrag}>
+                        Erstellen
+                    </Button>
+                </div>
+                <div className={styles.ButtonStyle}>
+                    <Link to={`/foren/${idForum}`}>
+                        <Button variant="outlined">Abbrechen</Button>
+                    </Link>
+                </div>
             </div>
         </div>
     )

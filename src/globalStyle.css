@@ -23,10 +23,10 @@
     --box-bg-gradient: linear-gradient(90deg, #e2001a 0%, #d9a91a 100%);
 
     /* globale Textfarbe */
-    --text-main-color: #f2f2f2;
+    --text-main-color: #fff;
     /* --text-main-color: white; */
     /* alternative Textfarbe */
-    --text-alt-color: #f2f2f2d5;
+    --text-alt-color: #fffb;
     /* >>> hier weitere gleichartige Textfarb-variablen hinzufügen für z.B. Header, Links, abgedunkelter text... */
 }
 
@@ -40,9 +40,10 @@ html {
     font-family: -apple-system, BlinkMacSystemFont, "Roboto", sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    color: var(--text-main-color);
+    color: var(--text-alt-color);
     font-size: 100%;
-    background: var(--bg-main);
+    /* background: var(--bg-main); */
+    /* color: var(--text-main-color); */
 }
 
 h1,
@@ -51,40 +52,15 @@ h3,
 h4 {
     font-family: "Nunito";
     letter-spacing: 1px;
+    color: var(--text-alt-color);
 }
 
 p {
     /* line-height: 1.3em; */
     font-size: 1rem;
     line-height: 1.5rem;
+    color: var(--text-alt-color);
 }
-
-/* button,
-input {
-    color: inherit;
-    font-family: "Roboto", sans-serif;
-    outline: 0;
-    border: 0;
-}
-
-button {
-    cursor: pointer;
-    font-size: 1rem;
-
-    height: 2.5rem;
-    padding: 0 20px;
-    border-radius: 4px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.35);
-    transition: box-shadow 100ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-button:hover {
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
-}
-
-button:active {
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.35);
-} */
 
 a {
     text-decoration: none;
@@ -104,4 +80,13 @@ a:hover {
     padding: 30px;
     margin: auto;
     background-color: var(--box-bg-main);
+}
+
+#tsparticles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
 }

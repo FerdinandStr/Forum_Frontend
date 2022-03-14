@@ -13,7 +13,7 @@ export default function Beitrag({ beitragNumber, beitragData, parseMdToHtml }) {
             </div>
             <div className={styles.BeitragContentArea}>
                 <div className={styles.BeitragHeader}>
-                    <div className={styles.DateDiv}>
+                    <p className={styles.Date}>
                         <MdOutlineWatchLater />
                         {new Date(createdAt).toLocaleString([], {
                             weekday: "long",
@@ -23,8 +23,8 @@ export default function Beitrag({ beitragNumber, beitragData, parseMdToHtml }) {
                             hour: "numeric",
                             minute: "numeric",
                         })}
-                    </div>
-                    <div>{"# " + beitragNumber}</div>
+                    </p>
+                    <p>{"# " + beitragNumber}</p>
                 </div>
                 <div className={styles.BeitragInhalt} dangerouslySetInnerHTML={{ __html: parseMdToHtml(inhalt) }} />
                 <div></div>

@@ -33,12 +33,12 @@ export default function Subforum({ idForum }) {
                         Neues Unterforum
                     </Button>
                 </Link>
-                {forenCount > limit ? <Pagination externalPaginationState={paginationState} /> : null}
+                {forenCount ? <Pagination externalPaginationState={paginationState} /> : null}
             </div>
             {forenCount ? (
                 <div className={styles.SubforenContainer}>
                     <div className={styles.HeaderDiv}>
-                        <p>Foren</p>
+                        <div>Foren</div>
                     </div>
                     <div className={styles.SubforenList}>
                         {foren ? foren.map((forum) => <Forum forum={forum} key={"forum" + forum.idForum} />) : null}

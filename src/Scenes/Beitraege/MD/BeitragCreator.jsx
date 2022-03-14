@@ -4,8 +4,9 @@ import "react-markdown-editor-lite/lib/index.css"
 import "./MdEditorStyle.css"
 import { Button } from "@mui/material"
 import { postBeitraege } from "../../../api/beitragRoutes"
+import MdFormatLink from "./plugins/MDFormatLink"
 
-//!!! for style changes look in globalStyles.css !!!//
+MdEditor.use(MdFormatLink)
 
 export default function BeitragCreator({ idForum, idForeneintrag, parseMdToHtml, forceUpdateBeitraege }) {
     const [mdText, setMdText] = useState("")

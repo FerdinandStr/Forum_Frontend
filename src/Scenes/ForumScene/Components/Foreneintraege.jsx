@@ -11,6 +11,8 @@ import { Button } from "@mui/material"
 import { RiDiscussLine } from "react-icons/ri"
 import { AiOutlineClockCircle } from "react-icons/ai"
 
+import Blockies from "react-blockies"
+
 export default function Foreneintraege({ idForum }) {
     const navigate = useNavigate()
 
@@ -26,7 +28,6 @@ export default function Foreneintraege({ idForum }) {
 
         getForeneintraegeInForum(idForum, limit, offset)
             .then((data) => {
-                console.log(data)
                 setForeneintraege(data)
             })
             .catch((err) => {
@@ -48,14 +49,14 @@ export default function Foreneintraege({ idForum }) {
                         Neuer Foreneintrag
                     </Button>
                 </Link>
-                {forneneintraegeCount > limit ? <Pagination externalPaginationState={paginationState} /> : null}
+                {forneneintraegeCount ? <Pagination externalPaginationState={paginationState} /> : null}
             </div>
 
             <div className={styles.EintreageContainer}>
                 <div className={styles.EintreageHeaderDiv}>
-                    <p className={styles.pEintreageEntryDiv}>
-                        Diskussionen <RiDiscussLine size={20} /> <AiOutlineClockCircle size={20} />
-                    </p>
+                    <div className={styles.HeaderForeneintrag}>{"Foreneinträge"}</div>
+                    <RiDiscussLine className={styles.HeaderCount} size={20} />
+                    <AiOutlineClockCircle className={styles.HeaderLetzterBeitrag} size={20} />
                 </div>
 
                 <div className={styles.EintreageList}>
@@ -69,27 +70,41 @@ export default function Foreneintraege({ idForum }) {
 }
 
 function Foreneintrag({ foreneintrag }) {
-    console.log("UPDATED ENDPOINT!!!", foreneintrag)
+    const { ersteller, createdAt } = foreneintrag.lastBeitrag
     return (
-        <div className={styles.EintreageEntryDiv}>
-            <div className={styles.ForeneintragInfo}>
-                <div>
-                    <Link to={"/foren/" + foreneintrag.idForum + "/foreneintraege/" + foreneintrag.idForeneintrag}>{foreneintrag.name} </Link>
-                </div>
+        <div className={styles.ForeneintragDiv}>
+            <div className={styles.ForeneintragLink}>
+                <Link to={"/foren/" + foreneintrag.idForum + "/foreneintraege/" + foreneintrag.idForeneintrag}>
+                    <h3>{foreneintrag.name}</h3>
+                </Link>
+            </div>
 
-                <div> {foreneintrag.countBeitrag}</div>
+            <p className={styles.BeitraegeCount}> {foreneintrag.countBeitrag}</p>
 
-                <div>
-                    {new Date(foreneintrag.lastBeitrag.createdAt).toLocaleString([], {
-                        weekday: "long",
-                        year: "numeric",
-                        month: "numeric",
-                        day: "numeric",
-                        hour: "numeric",
-                        minute: "numeric",
-                    })}
+            <div className={styles.LetzterBeitragDiv}>
+                <ErstellerProfil ersteller={ersteller} />
+                <div className={styles.LetzterBeitragInfo}>
+                    <p>
+                        von <span className={styles.ErstellerName}>{ersteller.erstellerName}</span>
+                    </p>
+                    <p>
+                        {new Date(createdAt).toLocaleString([], {
+                            weekday: "long",
+                            year: "numeric",
+                            month: "numeric",
+                            day: "numeric",
+                            hour: "numeric",
+                            minute: "numeric",
+                        })}
+                    </p>
                 </div>
             </div>
         </div>
     )
+}
+
+function ErstellerProfil({ ersteller }) {
+    const { idErsteller, erstellerName } = ersteller
+
+    return <Blockies seed={idErsteller + erstellerName} size={10} scale={5} className={styles.BlockieProfil} />
 }

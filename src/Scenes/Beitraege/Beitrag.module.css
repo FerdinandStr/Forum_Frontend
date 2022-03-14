@@ -16,11 +16,13 @@
     margin-bottom: 15px;
     padding-bottom: 15px;
     border-bottom: 1px var(--box-highlight) solid;
-    font-size: 0.9rem;
-    color: var(--text-alt-color);
 }
-.DateDiv,
-.DateDiv > svg {
+.BeitragHeader > p {
+    font-size: 0.9rem;
+}
+
+.Date,
+.Date > svg {
     display: flex;
     align-items: center;
     margin-right: 5px;

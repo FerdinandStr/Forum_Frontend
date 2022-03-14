@@ -22,8 +22,8 @@ export default function Beitraege() {
     //Pagination//
     //searchParams are updated inside the Pagination Component
     const [searchParams] = useSearchParams()
-    const page = parseInt(searchParams.get("page"))
-    const limit = parseInt(searchParams.get("limit"))
+    const page = parseInt(searchParams.get("page")) || 1
+    const limit = parseInt(searchParams.get("limit")) || 10
     const offset = limit * (page - 1)
     //to sync the 2 Pagination Components and load startPage and startLimit
     const paginationState = usePaginationState(beitragCount, page, limit)
