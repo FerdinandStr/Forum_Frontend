@@ -17,11 +17,11 @@ export default function LoginScene(props) {
         vorname: "",
         nachname: "",
         email: "",
-        password: "",
-        passwordConfirm: "",
+        passwort: "",
+        passwortConfirm: "",
         checkAgb: false,
     })
-    const { idStudiengang, vorname, nachname, email, password, passwordConfirm, checkAgb } = user
+    const { idStudiengang, vorname, nachname, email, passwort, passwortConfirm, checkAgb } = user
     function updateUser(updateObj) {
         setUser((prevUser) => ({ ...prevUser, ...updateObj }))
     }
@@ -31,7 +31,7 @@ export default function LoginScene(props) {
     const [error, setError] = useState()
 
     function tryLogin() {
-        userLogin(email, password)
+        userLogin(email, passwort)
             .then((data) => {
                 checkLogin(false, { idBenutzer: data.idBenutzer })
                 navigate("/")
@@ -46,8 +46,8 @@ export default function LoginScene(props) {
     }
 
     function tryRegister() {
-        if (password === passwordConfirm) {
-            userRegister({ idStudiengang, vorname, nachname, password, email })
+        if (passwort === passwortConfirm) {
+            userRegister({ idStudiengang, vorname, nachname, passwort, email })
                 .then((data) => {
                     console.log("REGISTERED", data)
                     checkLogin(false, { idBenutzer: data.idBenutzer })
@@ -95,12 +95,12 @@ export default function LoginScene(props) {
             </div> */}
             <div>
                 <TextField
-                    id="password"
+                    id="passwort"
                     label="Passwort"
                     variant="outlined"
                     type="password"
-                    value={password}
-                    onChange={(e) => updateUser({ password: e.target.value })}
+                    value={passwort}
+                    onChange={(e) => updateUser({ passwort: e.target.value })}
                     onKeyPress={handleEnterPressLogin}
                 />
             </div>
@@ -136,22 +136,22 @@ export default function LoginScene(props) {
 
             <div>
                 <TextField
-                    id="password"
+                    id="passwort"
                     label="Passwort"
                     variant="outlined"
                     type="password"
-                    value={password}
-                    onChange={(e) => updateUser({ password: e.target.value })}
+                    value={passwort}
+                    onChange={(e) => updateUser({ passwort: e.target.value })}
                 />
             </div>
             <div>
                 <TextField
-                    id="passwordConfirm"
+                    id="passwortConfirm"
                     label="Passwort wiederhohlen"
                     variant="outlined"
                     type="password"
-                    value={passwordConfirm}
-                    onChange={(e) => updateUser({ passwordConfirm: e.target.value })}
+                    value={passwortConfirm}
+                    onChange={(e) => updateUser({ passwortConfirm: e.target.value })}
                 />
             </div>
             <div>

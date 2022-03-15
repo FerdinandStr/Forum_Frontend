@@ -1,12 +1,12 @@
 import { postReq } from "../controller/rest"
 
-function userRegister({ idStudiengang, vorname, nachname, password, email }) {
-    return postReq("/benutzer/register", { idStudiengang, vorname, nachname, password: password, email })
+function userRegister({ idStudiengang, vorname, nachname, passwort, email }) {
+    return postReq("/benutzer/register", { idStudiengang, vorname, nachname, passwort: passwort, email })
 }
 
-function userLogin(email, password) {
-    console.log("login", email, password)
-    return postReq("/benutzer/login", { email, password: password })
+function userLogin(email, passwort) {
+    console.log("login", email, passwort)
+    return postReq("/benutzer/login", { email, passwort: passwort })
 }
 
 function userLogout() {
