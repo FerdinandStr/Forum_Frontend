@@ -22,6 +22,7 @@ export default function LoginScene(props) {
         checkAgb: false,
     })
     const { idStudiengang, vorname, nachname, email, passwort, passwortConfirm, checkAgb } = user
+
     function updateUser(updateObj) {
         setUser((prevUser) => ({ ...prevUser, ...updateObj }))
     }
@@ -46,23 +47,28 @@ export default function LoginScene(props) {
     }
 
     function tryRegister() {
-        if (passwort === passwortConfirm) {
-            userRegister({ idStudiengang, vorname, nachname, passwort, email })
-                .then((data) => {
-                    console.log("REGISTERED", data)
-                    checkLogin(false, { idBenutzer: data.idBenutzer })
-                    navigate("/")
-                })
-                .catch((e) => {
-                    if (e.messages) {
-                        setError(e.messages[0])
-                    } else {
-                        setError(e.error)
-                    }
-                })
-        } else {
+        if (passwort !== passwortConfirm) {
             setError("Passwörter stimmen nicht überein")
+            return
         }
+        if (!checkAgb) {
+            setError("AGBs müssen akzeptiert werden")
+            return
+        }
+
+        userRegister({ idStudiengang, vorname, nachname, passwort, email })
+            .then((data) => {
+                console.log("REGISTERED", data)
+                checkLogin(false, { idBenutzer: data.idBenutzer })
+                navigate("/")
+            })
+            .catch((e) => {
+                if (e.messages) {
+                    setError(e.messages[0])
+                } else {
+                    setError(e.error)
+                }
+            })
     }
 
     function handleEnterPressLogin(e) {
@@ -147,7 +153,7 @@ export default function LoginScene(props) {
             <div>
                 <TextField
                     id="passwortConfirm"
-                    label="Passwort wiederhohlen"
+                    label="Passwort wiederholen"
                     variant="outlined"
                     type="password"
                     value={passwortConfirm}
