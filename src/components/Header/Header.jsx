@@ -22,7 +22,7 @@ function Header(props) {
         <div className={styles.HeaderDiv}>
             <div>
                 <Link to={"/foren/"}>
-                    <img className={styles.Logo} src="/img/StudiForum_V2_transparent.svg" />
+                    <img className={styles.Logo} src="/img/StudiForum_V3_transparent.svg" />
                 </Link>
             </div>
             {loginUser ? (

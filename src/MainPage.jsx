@@ -58,7 +58,7 @@ function MainPage() {
                             enable: true,
                             outMode: "bounce",
                             random: false,
-                            speed: 0.5,
+                            speed: 0.3,
                             straight: false,
                         },
                         number: {
