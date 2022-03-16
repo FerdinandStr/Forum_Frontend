@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState, useContext } from "react"
 import styles from "./CreateUnterforum.module.css"
 import { postForen } from "../../api/forenRoutes"
 import { useParams, Link } from "react-router-dom"
@@ -6,11 +6,13 @@ import Button from "@mui/material/Button"
 import TextField from "@mui/material/TextField"
 import { useNavigate } from "react-router"
 import { getForenById } from "../../api/forenRoutes"
+import { AlertContext } from "../../helper/AlertContext"
 // Achtung !!!! ParentID Muss Numeric sein + Name muss min. 3 Zeichen lang sein
 // TODO !!!!!!
 
 export default function CreateUnterforum() {
     let { idForum } = useParams()
+    const { sendAlert } = useContext(AlertContext)
 
     const navigate = useNavigate()
 
@@ -27,17 +29,23 @@ export default function CreateUnterforum() {
             name: name,
             idParentForum: paresedId,
         }
-        postForen(data).then((data) => {
-            navigate("/foren/" + data.idForum)
-        })
+        postForen(data)
+            .then((data) => {
+                navigate("/foren/" + data.idForum)
+            })
+            .catch((e) => {
+                sendAlert(e.error, "error")
+            })
     }
 
     useEffect(() => {
-        getForenById({ idForum: idForum }).then((data) => {
-            console.log(data)
-            console.log(data[0])
-            setParentforumInfo(data[0].name)
-        })
+        getForenById({ idForum: idForum })
+            .then((data) => {
+                setParentforumInfo(data[0].name)
+            })
+            .catch((e) => {
+                sendAlert(e.error, "error")
+            })
     }, [idForum])
 
     return (

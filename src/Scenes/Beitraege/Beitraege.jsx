@@ -52,7 +52,7 @@ export default function Beitraege() {
             .then((data) => {
                 setForeneintragData(data)
             })
-            .catch((data) => {})
+            .catch((data) => { })
     }, [idForum, idForeneintrag])
 
     //ref for scrolling to Markdown component

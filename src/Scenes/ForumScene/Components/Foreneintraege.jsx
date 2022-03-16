@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState, useContext } from "react"
 import styles from "./Foreneintraege.module.css"
 import { Link } from "react-router-dom"
 import { MdAddCircle } from "react-icons/md"
@@ -13,10 +13,13 @@ import { AiOutlineClockCircle, AiOutlineTag } from "react-icons/ai"
 import Blockies from "react-blockies"
 import { getKategorie } from "../../../api/kategorieRoutes"
 
+import { AlertContext } from "../../../helper/AlertContext"
+
 export default function Foreneintraege({ idForum }) {
     const [forneneintraegeCount, setForneneintraegeCount] = useState(0)
     const paginationState = usePaginationState(forneneintraegeCount)
     const { limit, offset } = paginationState[0]
+    const { sendAlert } = useContext(AlertContext)
 
     const [kategorieList, setKategorieList] = useState()
 
@@ -30,19 +33,21 @@ export default function Foreneintraege({ idForum }) {
             .then((data) => {
                 setForeneintraege(data)
             })
-            .catch((err) => {
-                console.log("ERRROR!!!!", err)
+            .catch((e) => {
+                sendAlert(e.error, "error")
                 setForeneintraege()
             })
     }, [idForum, limit, offset])
 
     useEffect(() => {
-        getKategorie().then((data) => {
-            setKategorieList(data)
-        })
+        getKategorie()
+            .then((data) => {
+                setKategorieList(data)
+            })
+            .catch((e) => {
+                sendAlert(e.error, "error")
+            })
     }, [idForum])
-
-    console.log("LIST", kategorieList)
 
     return (
         <div className={styles.EintreageArea}>
@@ -76,7 +81,6 @@ export default function Foreneintraege({ idForum }) {
 function Foreneintrag({ foreneintrag }) {
     const { idForum, idForeneintrag, name, countBeitrag, kategorieName } = foreneintrag
     const { ersteller, createdAt } = foreneintrag.lastBeitrag
-    console.log(kategorieName)
     return (
         <div className={styles.ForeneintragDiv}>
             <div className={styles.ForeneintragLink}>

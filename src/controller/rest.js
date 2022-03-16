@@ -27,6 +27,16 @@ function postReq(url, data, opt) {
     })
 }
 
+function delReq(url, data, opt) {
+    const config = { method: "delete", url, data, ...opt }
+    return new Promise((resolve, reject) => {
+        axios(config)
+            .then((res) => {
+                resolve(res.data)
+            })
+            .catch((e) => handleError(e, reject))
+    })
+}
 function handleError(e, reject) {
     // console.log("check", e.message || e)
     if (!e.response) {
@@ -41,6 +51,6 @@ function handleError(e, reject) {
     }
 }
 
-function patchReq() {}
+function patchReq() { }
 
-export { getReq, postReq, patchReq, basePath }
+export { getReq, postReq, patchReq, delReq, basePath }

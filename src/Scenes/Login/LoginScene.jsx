@@ -58,7 +58,6 @@ export default function LoginScene(props) {
 
         userRegister({ idStudiengang, vorname, nachname, passwort, email })
             .then((data) => {
-                console.log("REGISTERED", data)
                 checkLogin(false, { idBenutzer: data.idBenutzer })
                 navigate("/")
             })

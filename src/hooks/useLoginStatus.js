@@ -12,7 +12,6 @@ function useLoginStatus(username, idbenutzer) {
         } else {
             postReq("/benutzer/checkLogin")
                 .then((data) => {
-                    console.log("info", data)
                     setLoginUser({ idbenutzer: data.id })
                 })
                 .catch((e) => {

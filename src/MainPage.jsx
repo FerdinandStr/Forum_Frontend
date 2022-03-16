@@ -12,6 +12,7 @@ import AGB from "./Scenes/AGB/AGB"
 import Impressum from "./Scenes/Impressum/Impressum"
 import Kontakt from "./Scenes/Kontakt/Kontakt"
 import Particles from "react-tsparticles"
+import UserOverview from "./Scenes/UserOverview/UserOverview"
 
 function MainPage() {
     const useLogin = useLoginStatus()
@@ -105,6 +106,8 @@ function MainPage() {
                     <Route path="/kontakt" element={<Kontakt />} />
                     <Route path="/agb" element={<AGB />} />
                     <Route path="/impressum" element={<Impressum />} />
+
+                    <Route path="/profil" element={<UserOverview useLogin={useLogin} />} />
                 </Routes>
             </div>
 

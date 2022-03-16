@@ -3,17 +3,19 @@ import React from "react"
 import { Link } from "react-router-dom"
 import { userLogout } from "../../api/authRoutes"
 import styles from "./style.module.css"
+import { useNavigate } from "react-router"
 
 function Header(props) {
     const { useLogin } = props
-
+    const navigate = useNavigate()
     const [loginUser, checkLogin] = useLogin
 
     function logout() {
-        userLogout().finally(() => {
-            checkLogin()
-        })
-        // navigate("/login")
+        userLogout()
+            .finally(() => {
+                checkLogin()
+            })
+            .then(navigate("/foren/"))
     }
 
     //load UserInfo on Login here to show name/email....
@@ -27,9 +29,16 @@ function Header(props) {
             </div>
             {loginUser ? (
                 <div className={styles.LoginButton}>
-                    <Button variant="contained" onClick={logout}>
-                        Logout
-                    </Button>
+                    <div className={styles.LoginButton}>
+                        <Link to={"/profil"}>
+                            <Button variant="contained">Profil</Button>
+                        </Link>
+                    </div>
+                    <div className={styles.LoginButton}>
+                        <Button variant="contained" onClick={logout}>
+                            Logout
+                        </Button>
+                    </div>
                 </div>
             ) : (
                 <div className={styles.LoginButton}>

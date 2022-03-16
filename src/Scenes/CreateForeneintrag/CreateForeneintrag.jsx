@@ -49,26 +49,30 @@ export default function CreateForeneintrag() {
             }
             postForeneintraege(data_forum)
                 .then((res) => {
-                    console.log("RESULT", res.idForeneintrag)
                     navigate("/foren/" + idForum + "/foreneintraege/" + res.idForeneintrag)
                 })
                 .catch((e) => {
-                    console.log("ERROR", e)
                     sendAlert(e.error, "error")
                 })
         }
     }
 
     useEffect(() => {
-        getKategorie().then((data) => {
-            setKategories([...kategories, ...data])
-        })
+        getKategorie()
+            .then((data) => {
+                setKategories([...kategories, ...data])
+            })
+            .catch((e) => {
+                sendAlert(e.error, "error")
+            })
 
-        getForenById({ idForum: idForum }).then((data) => {
-            console.log(data)
-            console.log(data[0])
-            setParentforumInfo(data[0].name)
-        })
+        getForenById({ idForum: idForum })
+            .then((data) => {
+                setParentforumInfo(data[0].name)
+            })
+            .catch((e) => {
+                sendAlert(e.error, "error")
+            })
     }, [idForum])
 
     return (
@@ -94,12 +98,12 @@ export default function CreateForeneintrag() {
                 >
                     {kategories
                         ? kategories.map((kat) => {
-                              return (
-                                  <MenuItem key={kat.idKategorie} value={kat.idKategorie}>
-                                      {kat.name}
-                                  </MenuItem>
-                              )
-                          })
+                            return (
+                                <MenuItem key={kat.idKategorie} value={kat.idKategorie}>
+                                    {kat.name}
+                                </MenuItem>
+                            )
+                        })
                         : null}
                 </Select>
             </div>
