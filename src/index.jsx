@@ -6,12 +6,15 @@ import MainPage from "./MainPage.jsx"
 import { ThemeProvider } from "@mui/material/styles"
 import { theme } from "./muiTheme"
 import CssBaseline from "@mui/material/CssBaseline"
+import { AlertContextProvider } from "./helper/AlertContext"
 
 ReactDOM.render(
     <BrowserRouter>
         <ThemeProvider theme={theme}>
             <CssBaseline />
-            <MainPage />
+            <AlertContextProvider>
+                <MainPage />
+            </AlertContextProvider>
         </ThemeProvider>
     </BrowserRouter>,
     document.getElementById("root")

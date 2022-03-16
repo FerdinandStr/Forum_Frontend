@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import styles from "./CreateForeneintrag.module.css"
 import { postForeneintraege } from "../../api/foreneintragRoutes"
 import { getKategorie } from "../../api/kategorieRoutes"
@@ -15,16 +15,11 @@ import Select from "@mui/material/Select"
 
 import parseMdToHtml from "../../helper/parseMdToHtml"
 import MdEditor from "react-markdown-editor-lite"
-// Achtung !!!! ParentID Muss Numeric sein + Name muss min. 5 Zeichen lang sein
-// TODO !!!!!!
-
-//https://mui.com/components/selects/
+import { AlertContext } from "../../helper/AlertContext"
 
 export default function CreateForeneintrag() {
-    /*-------------------------Weiter zum Komentarbereich----------------------------- */
     const navigate = useNavigate()
-    /*-------------------------Weiter zum Komentarbereich----------------------------- */
-
+    const { sendAlert } = useContext(AlertContext)
     const { idForum } = useParams()
 
     const [name, setName] = useState()
@@ -59,6 +54,7 @@ export default function CreateForeneintrag() {
                 })
                 .catch((e) => {
                     console.log("ERROR", e)
+                    sendAlert(e.error, "error")
                 })
         }
     }
