@@ -21,10 +21,14 @@ export default function UserOverview(props) {
             getUserById(loginUser.idBenutzer)
                 .then((user) => {
                     setUser(user)
-                    return getStudiengangByQuery(user.idStudiengang).then((data) => {
-                        const studiengang = data[0]
-                        setUser({ ...user, studiengangName: studiengang.name, kuerzel: studiengang.kuerzel })
-                    })
+
+                    const idStudiengang = user.idStudiengang || 0
+                    return getStudiengangByQuery({ idStudiengang })
+                        .then((data) => {
+                            const studiengang = data[0]
+                            setUser({ ...user, studiengangName: studiengang.name, kuerzel: studiengang.kuerzel })
+                        })
+                        .catch(() => null)
                 })
                 .catch((e) => {
                     sendAlert(e.error, "error")
@@ -49,28 +53,28 @@ export default function UserOverview(props) {
         <div className={styles.CUContainer}>
             <h1>Profil</h1>
             {user ? (
-                <div>
-                    <p className={styles.row}>
-                        <span className={styles.rowElement}>Vorname: </span>
-                        <span className={styles.rowElementData}>{user.vorname}</span>
-                    </p>
-                    <p className={styles.row}>
-                        <span className={styles.rowElement}>Nachname: </span>
-                        <span className={styles.rowElementData}>{user.nachname}</span>
-                    </p>
-                    <p className={styles.row}>
-                        <span className={styles.rowElement}>Mail: </span>
-                        <span className={styles.rowElementData}>{user.email}</span>
-                    </p>
-                    <p className={styles.row}>
-                        <span className={styles.rowElement}>Studiengang: </span>
-                        <span className={styles.rowElementData}>{user.studiengangName}</span>
-                    </p>
-                    <p className={styles.row}>
-                        <span className={styles.rowElement}>Kürzel: </span>
-                        <span className={styles.rowElementData}>{user.kuerzel}</span>
-                    </p>
-                </div>
+                <table>
+                    <tr className={styles.row}>
+                        <td className={styles.rowElement}>Vorname: </td>
+                        <td className={styles.rowElementData}>{user.vorname}</td>
+                    </tr>
+                    <tr className={styles.row}>
+                        <td className={styles.rowElement}>Nachname: </td>
+                        <td className={styles.rowElementData}>{user.nachname}</td>
+                    </tr>
+                    <tr className={styles.row}>
+                        <td className={styles.rowElement}>Mail: </td>
+                        <td className={styles.rowElementData}>{user.email}</td>
+                    </tr>
+                    <tr className={styles.row}>
+                        <td className={styles.rowElement}>Studiengang: </td>
+                        <td className={styles.rowElementData}>{user.studiengangName}</td>
+                    </tr>
+                    <tr className={styles.row}>
+                        <td className={styles.rowElement}>Kürzel: </td>
+                        <td className={styles.rowElementData}>{user.kuerzel}</td>
+                    </tr>
+                </table>
             ) : null}
             <div className={styles.ButtonStyle}>
                 <Button variant="contained" onClick={deleteUser}>

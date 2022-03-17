@@ -18,7 +18,7 @@ export default function LoginScene(props) {
     const navigate = useNavigate()
     const { sendAlert } = useContext(AlertContext)
 
-    const [studiengaenge, setStudiengaenge] = useState([{ idStudiengang: 0, name: "Keine Studiengang", kuerzel: "KSTG" }])
+    const [studiengaenge, setStudiengaenge] = useState([])
     const [selectedStudiengang, setSelectedStudiengang] = useState(0)
 
     const [user, setUser] = useState({
@@ -94,8 +94,7 @@ export default function LoginScene(props) {
     useEffect(() => {
         getStudiengangByQuery()
             .then((data) => {
-                console.log(data)
-                setStudiengaenge([...studiengaenge, ...data])
+                setStudiengaenge([{ idStudiengang: 0, name: "Kein Studiengang" }, ...data])
             })
             .catch((e) => {
                 sendAlert(e.error, "error")
@@ -109,27 +108,19 @@ export default function LoginScene(props) {
                     id="email"
                     label="E-Mail"
                     variant="outlined"
+                    fullWidth
                     value={email}
                     onChange={(e) => updateUser({ email: e.target.value })}
                     onKeyPress={handleEnterPressLogin}
                 />
             </div>
-            {/* <div>
-                <TextField
-                    id="login"
-                    label="Username or E-Mail"
-                    variant="outlined"
-                    value={login}
-                    onChange={(e) => updateUser({ login: e.target.value })}
-                    onKeyPress={handleEnterPressLogin}
-                />
-            </div> */}
             <div>
                 <TextField
                     id="passwort"
                     label="Passwort"
                     variant="outlined"
                     type="password"
+                    fullWidth
                     value={passwort}
                     onChange={(e) => updateUser({ passwort: e.target.value })}
                     onKeyPress={handleEnterPressLogin}
@@ -144,13 +135,21 @@ export default function LoginScene(props) {
     const registerComponents = (
         <>
             <div>
-                <TextField id="email" label="E-Mail" variant="outlined" value={email} onChange={(e) => updateUser({ email: e.target.value })} />
+                <TextField
+                    id="email"
+                    label="E-Mail"
+                    variant="outlined"
+                    fullWidth
+                    value={email}
+                    onChange={(e) => updateUser({ email: e.target.value })}
+                />
             </div>
             <div>
                 <TextField
                     id="vorname"
                     label="Vorname"
                     variant="outlined"
+                    fullWidth
                     value={vorname}
                     onChange={(e) => updateUser({ vorname: e.target.value })}
                 />
@@ -160,27 +159,21 @@ export default function LoginScene(props) {
                     id="nachname"
                     label="Nachname"
                     variant="outlined"
+                    fullWidth
                     value={nachname}
                     onChange={(e) => updateUser({ nachname: e.target.value })}
                 />
             </div>
             <div>
-                <Select
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
-                    value={selectedStudiengang}
-                    label="Studiengang"
-                    onChange={handleChangeSelectedStudiengang}
-                    className={styles.Textfield}
-                >
+                <Select id="studiengangSelect" fullWidth label="Studiengang" value={selectedStudiengang} onChange={handleChangeSelectedStudiengang}>
                     {studiengaenge
                         ? studiengaenge.map((studg) => {
-                            return (
-                                <MenuItem key={studg.idStudiengang} value={studg.idStudiengang}>
-                                    {studg.name} ({studg.kuerzel})
-                                </MenuItem>
-                            )
-                        })
+                              return (
+                                  <MenuItem key={studg.idStudiengang} value={studg.idStudiengang}>
+                                      {studg.name + (studg.kuerzel ? "(" + studg.kuerzel + ")" : "")}
+                                  </MenuItem>
+                              )
+                          })
                         : null}
                 </Select>
             </div>
@@ -190,6 +183,7 @@ export default function LoginScene(props) {
                     label="Passwort"
                     variant="outlined"
                     type="password"
+                    fullWidth
                     value={passwort}
                     onChange={(e) => updateUser({ passwort: e.target.value })}
                 />
@@ -200,6 +194,7 @@ export default function LoginScene(props) {
                     label="Passwort wiederholen"
                     variant="outlined"
                     type="password"
+                    fullWidth
                     value={passwortConfirm}
                     onChange={(e) => updateUser({ passwortConfirm: e.target.value })}
                 />
