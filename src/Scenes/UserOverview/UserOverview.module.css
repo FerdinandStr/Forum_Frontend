@@ -4,6 +4,9 @@
     justify-content: center;
     flex-direction: column;
 }
+.CUContainer > h1 {
+    margin-bottom: 20px;
+}
 
 .defaultCUButtons {
     display: flex;
@@ -18,5 +21,9 @@
 }
 
 .ButtonStyle {
-    margin: 5px;
+    margin: 30px 0 0;
+}
+
+.rowElementData {
+    color: var(--text-main-color);
 }

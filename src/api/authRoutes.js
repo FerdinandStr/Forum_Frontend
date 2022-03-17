@@ -14,14 +14,10 @@ function userLogout() {
 
 function getUserById(userId) {
     return getReq("/benutzer/" + userId)
-        .then()
-        .catch()
 }
 
 function deactivateUserById(userId) {
     return delReq("/benutzer/" + userId)
-        .then()
-        .catch()
 }
 
 export { userRegister, userLogin, userLogout, getUserById, deactivateUserById }

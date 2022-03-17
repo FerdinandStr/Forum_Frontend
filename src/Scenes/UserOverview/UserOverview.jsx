@@ -4,50 +4,46 @@ import styles from "./UserOverview.module.css"
 import { getUserById, deactivateUserById } from "../../api/authRoutes"
 import { AlertContext } from "../../helper/AlertContext"
 import { userLogout } from "../../api/authRoutes"
-//import { postForen } from "../../api/forenRoutes"
 
 import { useNavigate } from "react-router"
-// Achtung !!!! ParentID Muss Numeric sein + Name muss min. 3 Zeichen lang sein
-// TODO !!!!!!
+import { getStudiengangByQuery } from "../../api/studiengangRoutes"
 
 export default function UserOverview(props) {
     const { useLogin } = props
     const [loginUser, checkLogin] = useLogin
     const { sendAlert } = useContext(AlertContext)
-
     const navigate = useNavigate()
 
     const [user, setUser] = useState()
-
-    const deleteUser = (e) => {
-        deactivateUserById(loginUser.idbenutzer)
-            .then(() => {
-                userLogout()
-                    .finally(() => {
-                        checkLogin()
+    useEffect(() => {
+        //load User data
+        if (loginUser.idBenutzer) {
+            getUserById(loginUser.idBenutzer)
+                .then((user) => {
+                    setUser(user)
+                    return getStudiengangByQuery(user.idStudiengang).then((data) => {
+                        const studiengang = data[0]
+                        setUser({ ...user, studiengangName: studiengang.name, kuerzel: studiengang.kuerzel })
                     })
-                    .then(navigate("/foren/"))
+                })
+                .catch((e) => {
+                    sendAlert(e.error, "error")
+                })
+        }
+    }, [loginUser])
+
+    function deleteUser() {
+        deactivateUserById(loginUser.idBenutzer)
+            .then(() => {
+                userLogout().finally(() => {
+                    checkLogin()
+                    navigate("/foren")
+                })
             })
             .catch((e) => {
                 sendAlert(e.error, "error")
             })
     }
-
-    // navigate("/login")
-
-    useEffect(() => {
-        if (loginUser.idbenutzer) {
-            console.log(loginUser.idbenutzer)
-            getUserById(loginUser.idbenutzer)
-                .then((data) => {
-                    setUser(data)
-                })
-                .catch((e) => {
-                    sendAlert(e.error, "error")
-                    //navigate("/forum")
-                })
-        }
-    }, [loginUser])
 
     return (
         <div className={styles.CUContainer}>
@@ -56,21 +52,31 @@ export default function UserOverview(props) {
                 <div>
                     <p className={styles.row}>
                         <span className={styles.rowElement}>Vorname: </span>
-                        <span className={styles.rowElement}>{user.vorname}</span>
+                        <span className={styles.rowElementData}>{user.vorname}</span>
                     </p>
                     <p className={styles.row}>
                         <span className={styles.rowElement}>Nachname: </span>
-                        <span className={styles.rowElement}>{user.nachname}</span>
+                        <span className={styles.rowElementData}>{user.nachname}</span>
                     </p>
                     <p className={styles.row}>
                         <span className={styles.rowElement}>Mail: </span>
-                        <span className={styles.rowElement}>{user.email}</span>
+                        <span className={styles.rowElementData}>{user.email}</span>
+                    </p>
+                    <p className={styles.row}>
+                        <span className={styles.rowElement}>Studiengang: </span>
+                        <span className={styles.rowElementData}>{user.studiengangName}</span>
+                    </p>
+                    <p className={styles.row}>
+                        <span className={styles.rowElement}>Kürzel: </span>
+                        <span className={styles.rowElementData}>{user.kuerzel}</span>
                     </p>
                 </div>
             ) : null}
-            <Button variant="contained" onClick={deleteUser}>
-                Profil löschen
-            </Button>
+            <div className={styles.ButtonStyle}>
+                <Button variant="contained" onClick={deleteUser}>
+                    Profil löschen
+                </Button>
+            </div>
         </div>
     )
 }

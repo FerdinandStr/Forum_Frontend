@@ -29,16 +29,12 @@ function Header(props) {
             </div>
             {loginUser ? (
                 <div className={styles.LoginButton}>
-                    <div className={styles.LoginButton}>
-                        <Link to={"/profil"}>
-                            <Button variant="contained">Profil</Button>
-                        </Link>
-                    </div>
-                    <div className={styles.LoginButton}>
-                        <Button variant="contained" onClick={logout}>
-                            Logout
-                        </Button>
-                    </div>
+                    <Link to={"/profil"}>
+                        <Button variant="contained">Profil</Button>
+                    </Link>
+                    <Button variant="contained" onClick={logout}>
+                        Logout
+                    </Button>
                 </div>
             ) : (
                 <div className={styles.LoginButton}>

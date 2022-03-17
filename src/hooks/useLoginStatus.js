@@ -2,9 +2,9 @@ import { useEffect, useState } from "react"
 import { useNavigate } from "react-router"
 import { postReq } from "../controller/rest"
 
-function useLoginStatus(username, idbenutzer) {
+function useLoginStatus(username, idBenutzer) {
     const navigate = useNavigate()
-    const [loginUser, setLoginUser] = useState({ username, idbenutzer })
+    const [loginUser, setLoginUser] = useState({ username, idBenutzer })
 
     function checkLogin(openLogin, loginOverwrite) {
         if (loginOverwrite) {
@@ -12,10 +12,9 @@ function useLoginStatus(username, idbenutzer) {
         } else {
             postReq("/benutzer/checkLogin")
                 .then((data) => {
-                    setLoginUser({ idbenutzer: data.id })
+                    setLoginUser({ idBenutzer: data.id })
                 })
                 .catch((e) => {
-                    console.log("ERROR", e)
                     setLoginUser(null)
                     openLogin ? navigate("../login", { replace: true }) : null
                 })
@@ -24,7 +23,7 @@ function useLoginStatus(username, idbenutzer) {
 
     useEffect(() => {
         checkLogin()
-    }, [idbenutzer])
+    }, [idBenutzer])
 
     return [loginUser, checkLogin]
 }
