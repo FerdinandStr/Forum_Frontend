@@ -51,6 +51,7 @@ h2,
 h3,
 h4 {
     font-family: "Nunito";
+    font-weight: 400;
     letter-spacing: 1px;
     color: var(--text-alt-color);
 }
