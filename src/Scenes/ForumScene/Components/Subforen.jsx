@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react"
+import React, { useEffect, useState } from "react"
 import { countSubforen, getSubforen } from "../../../api/forenRoutes"
 import { Link } from "react-router-dom"
 import styles from "./Subforen.module.css"
@@ -6,14 +6,11 @@ import Pagination, { usePaginationState } from "../../../components/Pagination/P
 import { Button } from "@mui/material"
 import { MdAddCircle } from "react-icons/md"
 
-import { AlertContext } from "../../../helper/AlertContext"
-
 export default function Subforum({ idForum }) {
     const [foren, setForen] = useState()
     const [forenCount, setForenCount] = useState(0)
     const paginationState = usePaginationState(forenCount)
     const { limit, offset } = paginationState[0]
-    const { sendAlert } = useContext(AlertContext)
 
     useEffect(() => {
         countSubforen(idForum).then((count) => setForenCount(count))
@@ -23,7 +20,7 @@ export default function Subforum({ idForum }) {
                 setForen(data)
             })
             .catch((e) => {
-                sendAlert(e.error, "error")
+                // sendAlert(e.error, "error")
                 setForen()
             })
     }, [idForum, limit, offset])

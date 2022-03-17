@@ -34,7 +34,7 @@ export default function Foreneintraege({ idForum }) {
                 setForeneintraege(data)
             })
             .catch((e) => {
-                sendAlert(e.error, "error")
+                // sendAlert(e.error, "error")
                 setForeneintraege()
             })
     }, [idForum, limit, offset])
