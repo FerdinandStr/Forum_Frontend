@@ -1,16 +1,25 @@
 import { Alert, Button, FormControlLabel, FormGroup, Switch, TextField } from "@mui/material"
-import React, { useState } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import { useNavigate } from "react-router"
 import { userLogin, userRegister } from "../../api/authRoutes"
 import styles from "./LoginScene.module.css"
+import Select from "@mui/material/Select"
+import MenuItem from "@mui/material/MenuItem"
+
+import { getStudiengangByQuery } from "../../api/studiengangRoutes"
 
 import Checkbox from "@mui/material/Checkbox"
 import { Link } from "react-router-dom"
+import { AlertContext } from "../../helper/AlertContext"
 
 export default function LoginScene(props) {
     const { useLogin } = props
     const [isLoggedIn, checkLogin] = useLogin
     const navigate = useNavigate()
+    const { sendAlert } = useContext(AlertContext)
+
+    const [studiengaenge, setStudiengaenge] = useState([{ idStudiengang: 0, name: "Keine Studiengang", kuerzel: "KSTG" }])
+    const [selectedStudiengang, setSelectedStudiengang] = useState(0)
 
     const [user, setUser] = useState({
         idStudiengang: null,
@@ -21,7 +30,7 @@ export default function LoginScene(props) {
         passwortConfirm: "",
         checkAgb: false,
     })
-    const { idStudiengang, vorname, nachname, email, passwort, passwortConfirm, checkAgb } = user
+    const { vorname, nachname, email, passwort, passwortConfirm, checkAgb } = user
 
     function updateUser(updateObj) {
         setUser((prevUser) => ({ ...prevUser, ...updateObj }))
@@ -55,6 +64,7 @@ export default function LoginScene(props) {
             setError("AGBs müssen akzeptiert werden")
             return
         }
+        const idStudiengang = selectedStudiengang == 0 ? null : selectedStudiengang
 
         userRegister({ idStudiengang, vorname, nachname, passwort, email })
             .then((data) => {
@@ -75,6 +85,22 @@ export default function LoginScene(props) {
             tryLogin()
         }
     }
+
+    const handleChangeSelectedStudiengang = async (e) => {
+        setSelectedStudiengang(e.target.value)
+        console.log(studiengaenge)
+    }
+
+    useEffect(() => {
+        getStudiengangByQuery()
+            .then((data) => {
+                console.log(data)
+                setStudiengaenge([...studiengaenge, ...data])
+            })
+            .catch((e) => {
+                sendAlert(e.error, "error")
+            })
+    }, [])
 
     const loginComponents = (
         <>
@@ -138,7 +164,26 @@ export default function LoginScene(props) {
                     onChange={(e) => updateUser({ nachname: e.target.value })}
                 />
             </div>
-
+            <div>
+                <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={selectedStudiengang}
+                    label="Studiengang"
+                    onChange={handleChangeSelectedStudiengang}
+                    className={styles.Textfield}
+                >
+                    {studiengaenge
+                        ? studiengaenge.map((studg) => {
+                            return (
+                                <MenuItem key={studg.idStudiengang} value={studg.idStudiengang}>
+                                    {studg.name} ({studg.kuerzel})
+                                </MenuItem>
+                            )
+                        })
+                        : null}
+                </Select>
+            </div>
             <div>
                 <TextField
                     id="passwort"

@@ -92,7 +92,7 @@ export default function CreateForeneintrag() {
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
                     value={selectedKategorie}
-                    label="Age"
+                    label="Kategorie"
                     onChange={handleChangeSelectedKategorie}
                     className={styles.Textfield}
                 >
